@@ -1,0 +1,396 @@
+*
+{
+	text-transform: uppercase;
+}
+
+body
+{
+	background: gray;
+	font-family: 'serif';
+}
+
+#cuerpo
+{
+	width: 90%;
+	min-width: 800px;
+
+	background: white;
+	overflow: hidden;
+	border-radius: 35px;
+
+	position: relative;
+	margin: 20px auto;
+}
+
+#header
+{
+	height: 70px;
+	width: 100%;
+}
+
+#sesion
+{
+	height: 10px;
+	width: 100%;
+
+	text-align: right;
+	font-size: 12px;
+	padding: 5px 0px 15px 0px;
+}
+
+#barramenu
+{
+	height: 50px;
+	width: 100%;
+	
+	background: #0000cb;
+	border: 1px solid #0000cb;
+
+	position: relative;
+	z-index: 1;
+}
+
+#contenido
+{
+	width: 90%;
+
+	text-align: center;
+
+	margin-top: 35px;
+	margin-left: 5%;
+}
+
+#footer
+{
+	width: 100%;
+
+	background: url("img/footer.jpg");
+	text-align: center;
+	padding: 30px 0px 20px 0px;
+
+	margin-top: 35px;
+}
+
+
+
+/* ----- Botones ----- */
+
+.boton
+{
+	width: 100px;
+
+	padding: 10px;
+	color: white;
+	background: #0000cb;
+	cursor: pointer;
+
+	transition: 0.3s;
+}
+
+.boton:hover
+{
+	box-shadow: 0px 0px 10px 1px white inset;
+}
+
+.boton[disabled="disabled"]
+{
+	background: gray;
+
+	transition: 0.3s;
+}
+
+.bt_opc
+{
+	height: 40px;
+	width: 40px;
+
+	cursor: pointer;
+}
+
+/* ----- Fin Botones ----- */
+
+
+
+/* ----- Extras ----- */
+
+b
+{
+	font-size: 18px;
+}
+
+a
+{
+	color: blue;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+h3
+{
+	border-bottom: 1px solid;
+	padding-bottom: 10px;
+	color: #0000cb;
+}
+
+.cargando
+{
+	background: url("img/cargando.gif") white no-repeat center !important;
+}
+
+/* ----- Fin Extras ----- */
+
+
+
+/* ----- Formularios ----- */
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select
+{
+	height: 30px;
+	width: 215px;
+
+	font-size: 16px;
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;
+}
+
+.requerido
+{
+	color: red;
+	position: relative;
+	cursor: default;
+}
+
+.requerido:hover:before
+{
+	content: "Campo Requerido";
+
+	font-size: 14px;
+	background: white;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid red;
+
+	position: absolute;
+	bottom: 100%;
+	right: 100%;
+}
+
+/* ----- Fin Formularios ----- */
+
+
+
+/* ----- Menu ----- */
+
+#menu li
+{
+	display: inline;
+	padding: 15px 25px;
+	color: white;
+	transition: 0.3s;
+	
+	position: relative;
+}
+
+#menu li:hover
+{
+	background: white;
+	color: #0000cb;
+}
+
+#menu li:hover ul
+{
+	display: block;
+}
+
+#menu ul
+{
+	padding: 0px;
+	display: none;
+
+	position: absolute;
+	top: 100%;
+	left: 4px;
+	z-index: 2;
+}
+
+#menu ul li
+{
+	width: 100%;
+
+	background: #0000cb;
+	color: white;
+	display: block;
+
+	margin-top: 2px;
+}
+
+#menu ul a:last-child li
+{
+	border-radius: 0px 0px 10px 10px;
+}
+
+/* ----- Fin Menu ----- */
+
+
+
+/* ----- Pop UP ----- */
+
+.falerta
+{
+	height: 0px;
+	width: 100%;
+	
+	overflow: hidden;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+}
+
+.cerrar_alerta
+{
+	height: 100%;
+	width: 100%;
+
+	background: rgba(0, 0, 0, 0.5);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.alerta
+{
+	max-height: 80%;
+	width: 35%;
+
+	background: white;
+	padding: 20px;
+	padding-bottom: 30px;
+	border-radius: 25px;
+	text-align: center;
+	overflow: auto;
+
+	position: relative;
+	margin: 5% auto;
+	z-index: 3;
+}
+
+@keyframes abrir_sesion
+{
+	to
+	{
+		height: 100%;
+	}
+}
+
+@-webkit-keyframes abrir_sesion
+{
+	to
+	{
+		height: 100%;
+	}
+}
+
+@keyframes cerrar_sesion
+{
+	from
+	{
+		height: 100%;
+	}
+
+	to
+	{
+		height: 0px;
+	}
+}
+
+@-webkit-keyframes cerrar_sesion
+{
+	from
+	{
+		height: 100%;
+	}
+
+	to
+	{
+		height: 0px;
+	}
+}
+
+/* ----- Fin Pop UP ----- */
+
+
+
+/* ----- Tablas ----- */
+
+	/* Tablas Principales */
+
+	.tab_index
+	{
+		margin: 0 auto;
+	}
+
+	.tab_index td
+	{
+		font-size: 14px;
+		text-align: left;
+	}
+
+	.tab_index td,
+	.tab_index th
+	{
+		border: 1px solid;
+		padding: 15px;
+	}
+
+	.tab_index tr:first-child th
+	{
+		color: #0000cb;
+	}
+
+	.tab_index tr:first-child th:first-child
+	{
+		border-top-left-radius: 15px;
+	}
+
+	.tab_index tr:first-child th:last-child
+	{
+		border-top-right-radius: 15px;
+	}
+
+
+
+	/* Tablas Secundarias */
+
+	.tabla th, 
+	.tabla td
+	{
+		border: 1px solid;
+		padding: 5px;
+	}
+
+/* ----- Fin Tablas ----- */
+
+
+
+/* Fieldsets */
+
+fieldset
+{
+	padding: 15px 30px 25px 30px;
+	border-radius: 15px;
+}
+
+legend
+{
+	padding: 10px 20px;
+	border: 1px solid;
+	color: white;
+	background: #0000cb;
+	border-radius: 10px;
+}

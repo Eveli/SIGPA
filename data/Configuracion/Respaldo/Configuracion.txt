@@ -1,0 +1,6 @@
+1. Abrir terminal con permisos SU
+2. Escribir en el terminal:
+	. su postgres
+	. createuser -d -s -r -l www-data
+	. psql
+	. ALTER USER www-data WITH ENCRYPTED PASSWORD 'root';

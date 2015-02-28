@@ -1,0 +1,1 @@
+<object data="data/Ayuda/manual.pdf" style="height: 27.94cm; width: 100%;" type="application/pdf"></object>
