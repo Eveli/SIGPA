@@ -31,8 +31,9 @@
 		<input type="text" name="d" placeholder="Carrera" maxlength=50 title="Nombre de la carrera" OnKeyUp="VAL.call(this, event, 'text', true); inputLength.call(this, true); verificar_car.call(this);" OnChange="verificar_car.call(this);" OnFocus="inputLength.call(this, true)" OnBlur="inputLength.call(this)" required="required" />
 	</span> <span class="requerido">*</span><div id="ex_carrera" style="padding-top: 10px; color: red; display: none;">Ya existe una carrera con ese nombre</div><br /><br />
 
-	<select name="ca" required="required" title="Seleccione el área al que pertenece la carrera">
-		<option value="">ÁREA</option>
+	<span id="areaS">
+		<select name="ca" title="Seleccione el área al que pertenece la carrera">
+			<option value="">ÁREA</option>
 
 <?php
 	$sql="select * from area order by d";
@@ -44,9 +45,22 @@
 	}
 ?>
 
-	</select> <span class="requerido">*</span>
+		</select> <span class="requerido">*</span><br /><br />
 
-	<br /><br />
+		<a onClick="this.parentNode.style.display='none'; getID('areaT').style.display='block'; document.carrera.ca.value='';" title="Haga click aqui si el area que quiere seleccionar no aparece entre las listadas">Agregar nueva Área</a><br/><br/>
+	</span>
+
+	<span id="areaT" style="display: none;">
+		<span class="inputLength">
+			<input type="text" name="caT" placeholder="Cod." maxlength=2 title="Código del área" style="width: 40px;" OnKeyUp="VAL.call(this, event, 'num', true); inputLength.call(this, true);" OnFocus="inputLength.call(this, true)" OnBlur="inputLength.call(this)" />
+		</span> <span class="requerido">*</span><br /><br />
+
+		<span class="inputLength">
+			<input type="text" name="da" placeholder="Área" maxlength=50 title="Área" OnKeyUp="VAL.call(this, event, 'text', true); inputLength.call(this, true);" OnFocus="inputLength.call(this, true)" OnBlur="inputLength.call(this)" />
+		</span> <span class="requerido">*</span><br /><br />
+
+		<a onClick="this.parentNode.style.display='none'; getID('areaS').style.display='block'; document.carrera.caT.value=''; document.carrera.da.value='';" title="Haga click aqui si el area que quiere ingresar ya esta registrada">Volver</a><br/><br/>
+	</span>
 
 	<input type="submit" id="subcarr" value="Crear" disabled="disabled" class="boton" />&nbsp;&nbsp;&nbsp;<a href="?r=data/Carreras/index.php"><input type="button" value="Cancelar" class="boton" /></a>
 

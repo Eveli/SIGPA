@@ -16,6 +16,7 @@
 		<a href="?r=data/Planificacion/planilla.php"><li> Planificación </li></a>
 		<li> Configuración 
 			<ul>
+				<a href="?r=data/Areas/index.php"><li> Areas </li></a>
 				<a href="?r=data/Configuracion/Bitacora/index.php"><li> Bitácora </li></a>
 				<a href="?r=data/Configuracion/Usuarios/index.php"><li> Usuarios </li></a>
 				<a href="?r=data/Configuracion/Respaldo/index.php"><li> Repaldos </li></a>

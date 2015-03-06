@@ -16,7 +16,7 @@
 	if(!$_POST["caT"])
 	{
 		$ca=$_POST["ca"];
-		$sql="insert into carrera values('$cc', '$d', '$ca')";
+		$sql="update carrera set d='$d', ca='$ca' where cc='$cc'";
 	}
 
 	else
@@ -27,14 +27,14 @@
 		$sql="insert into area values('$caT', '$da')";
 		$ejec=pg_query($sigpa, $sql);
 
-		$sql="insert into carrera values('$cc', '$d', '$caT')";
+		$sql="update carrera set d='$d', ca='$caT' where cc='$cc'";
 	}
 
 	$ejec=pg_query($sigpa, $sql);
 
 	if($ejec)
 	{
-		echo "Se creó satisfactoriamente la carrera";
-		historial($sigpa, $_SESSION["ci"], "Se creó la carrera $d");
+		echo "Se modificó satisfactoriamente la carrera";
+		historial($sigpa, $_SESSION["ci"], "Se modificó la carrera $d");
 	}
 ?>
