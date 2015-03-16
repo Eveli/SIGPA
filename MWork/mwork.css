@@ -1,0 +1,28 @@
+/* Campos */
+
+
+
+	/*	Cantidad de caracteres disponibles por escribir */
+
+.inputLength
+{
+	position: relative;
+}
+
+.inputLength input
+{
+	font-size: inherit;
+	padding-right: 5ex;
+}
+
+.inputLength:after
+{
+	content: attr(data-length);
+
+	text-align: center;
+	font-size: inherit;
+
+	position: absolute;
+	top: 0px;
+	right: 1em;
+}
