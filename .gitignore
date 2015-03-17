@@ -1,2 +1,4 @@
 *.dropbox
 *.save
+lib/conexion.php
+*.php
