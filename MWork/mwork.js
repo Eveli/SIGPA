@@ -484,7 +484,7 @@ function VAL(e, t, msj, ns)
 		break;
 
 		case 'textc':
-			er=/[a-zA-Z0-9\sñÑáÁéÉíÍóÓúÚ,;.:'"_-!?]/;
+			er=/[a-zA-Z0-9\sñÑáÁéÉíÍóÓúÚ,;.:'"_!?-]/;
 
 			if(!msj)
 				msj="Carácter inválido, solo se aceptan caracteres usadas en textos (letras, numeros, espacios y algunos caracteres especiales (.,:;'\"-_))";
