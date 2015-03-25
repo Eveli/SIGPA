@@ -28,6 +28,7 @@
 			join uc
 				on uc.cuc=p.cuc and uc.cc=(select cc from coordinacion where ci='$_SESSION[ci]')
 		where p.ci='$_GET[ci]'
+		group by p.cuc, uc.d
 	";
 	$ejec=pg_query($sigpa, $sql);
 
@@ -86,14 +87,14 @@
 				<option value=""> Seleccione.. </option>
 
 <?php
-	$sql="select cuc, d, t, tr from uc $where group by cuc, d, t, tr order by d";
+	$sql="select cuc, d from uc $where group by cuc, d, t order by d";
 	$ejec=pg_query($sigpa, $sql);
 
 	while($uc=pg_fetch_object($ejec))
 	{
 ?>
 
-				<option <?= "value=\"$uc->cuc\"" ?> > <?= "$uc->d (T$uc->t/T$uc->tr)" ?> </option>
+				<option <?= "value=\"$uc->cuc\"" ?> > <?= "$uc->d" ?> </option>
 
 <?php
 	}
