@@ -11,7 +11,7 @@
 		$tr=1;
 	}
 
-	$sql="select p from carga where order by p desc limit 1";
+	$sql="select p from carga order by p desc limit 1";
 	$ejec=pg_query($sigpa, $sql);
 
 	$p=pg_fetch_object($ejec);
@@ -31,7 +31,7 @@
 			from carga c
 				join profesor p
 					on p.ci=c.ci
-			where c.cuc='$uc->cuc' and c.cm='$cm' and c.tr='$tr' and c.sup is null
+			where c.cuc='$uc->cuc' and c.cm='$cm' and c.tr='$tr' and p='$p->p' and c.sup is null
 		";
 		$ejec2=pg_query($sigpa, $sql);
 		$ra=pg_affected_rows($ejec2);

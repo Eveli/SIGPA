@@ -55,7 +55,7 @@
 		select uc.cuc cuc, uc.d uc, uc.t t, uc.tr tr, c.s sec, c.ht ht, c.hp hp, uc.ht uht, uc.hp uhp, c.cm cm
 		from carga c
 			join uc
-				on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm
+				on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm and cc='$cc'
 		where c.ci='$ci'
 	";
 	$ejec=pg_query($sigpa, $sql);

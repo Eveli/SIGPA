@@ -404,6 +404,32 @@
 
 		reiniciar();
 	}
+
+	function nSec(v)
+	{
+		if(!v)
+			return false;
+
+		v=v.toUpperCase();
+
+		if(confirm("Se agregara la sección "+v+", es correcto?"))
+		{
+			new ajax_req(function ()
+			{
+				if((this.statusText=="OK")&&(this.readyState==4))
+				{
+					if(this.responseText)
+					{
+						document.carga.nsec.style.display="none";
+						getID("secciones").innerHTML+="<label><input type=\"checkbox\" name=\"sec[]\" data-sec=\""+v+"\" OnChange=\"cuenta.call(this)\" /> "+v+" </label>";
+					}
+
+					else
+						alert("Ocurrio un error, vuelva a intentarlo");
+				}
+			}, "data/Planificacion/nsec.php", "POST", "id="+v);
+		}
+	}
 </script>
 
 <div class="falerta" id="asig">

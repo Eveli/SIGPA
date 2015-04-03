@@ -15,7 +15,7 @@
 		from profesor pr
 		join pertenece p 
 		 	on p.ci=pr.ci and p.cc='$x->cc'
-		where pr.ci!='$x->ci' and pr.s='$x->s'
+		where pr.s='$x->s'
 		order by pr.ci
 	";
 	$ejec=pg_query($sigpa, $sql);

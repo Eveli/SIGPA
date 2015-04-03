@@ -63,6 +63,8 @@
 	
 	Secciones:
 
+	<span id="secciones">
+
 <?php
 		$sql="select * from seccion order by id";
 		$ejec=pg_query($sigpa, $sql);
@@ -70,6 +72,12 @@
 		while($sec=pg_fetch_object($ejec))
 			echo "<label><input type='checkbox' name='sec[]' data-sec='$sec->id' OnChange='cuenta.call(this)' /> $sec->id </label>";
 ?>
+
+	</span>
+
+	<a title="Agregar una sección" onClick="document.carga.nsec.style.display='inline'">+</a>
+
+	<input type="text" name="nsec" placeholder="Nueva sección" maxlength="1" style="display: none; width: 9em;" onChange="nSec(this.value)" />
 
 	<input type="hidden" name="cuc" <?= "value='$cuc'"; ?> />
 	<input type="hidden" name="uc_ht" <?= "value='$uc->ht'"; ?> />

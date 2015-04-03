@@ -47,7 +47,21 @@
 	$sql="insert into perfil values('$cuc', '$ci')";
 	$ejec=pg_query($sigpa, $sql);
 
-	$sql="insert into carga values('$cuc', '$ci', '$p', '$s', $ht, $hp, $tr, $cm, '$sup')";
+	$sql="select cuc from carga where cuc='$cuc' and ci='$sup' and p='$p' and tr='$tr' and cm='$cm'";
+	$ejec=pg_query($sigpa, $sql);
+
+	if(pg_affected_rows($ejec))
+	{
+		echo "El profesor a quien intenta asigar esta carga ya la tiene asignada, si desea agregar o cambiar una sección debe eliminar la carga actual";
+		exit;
+	}
+
+	if($sup)
+		$sql="insert into carga values('$cuc', '$ci', '$p', '$s', $ht, $hp, $tr, $cm, '$sup')";
+
+	else
+		$sql="insert into carga values('$cuc', '$ci', '$p', '$s', $ht, $hp, $tr, $cm)";
+
 	$ejec=pg_query($sigpa, $sql);
 
 	if($ejec)
