@@ -41,7 +41,7 @@
 
 				$nsup=pg_fetch_object($ejec2);
 
-				$d.="Suple $nsup->a1 $nsup->n1 ($sup[1]) en $duc->d ($sup[0])<br>";
+				$d.="Suple Prof. $nsup->a1 $nsup->n1 en $duc->d<br>";
 			}
 
 			else
@@ -61,7 +61,7 @@
 				{
 					$sup=pg_fetch_object($ejec2);
 
-					$d.="Suplente de $sup->a1 $sup->n1 ($sup->ci) en $sup->uc ($uc[$i])<br>";
+					$d.="Suplente de Prof. $sup->a1 $sup->n1 en $sup->uc<br>";
 				}
 			}
 
@@ -93,13 +93,15 @@
 
 		$h=pg_fetch_object($ejec2);
 
+		($h->h>$h->hd) ? $ht=$h->hd : $ht=$h->h;
+
 		if(($h->hd-$h->h)>=0)
-			$d.="<span style=\"font-size: 10pt; font-weight: bold;\">Total de Horas: ".round($h->h)."</span><br>";
+			$d.="<span style=\"font-size: 10pt; font-weight: bold;\">Total: ".$ht." horas</span><br>";
 
 		else
 		{
 			$htv=($h->hd-$h->h)*-1;
-			$d.="<span style=\"font-size: 10pt; font-weight: bold;\">Total de Horas: ".round($h->h)."</span><br>(+".round($htv)." Horas de trabajo voluntario)<br>";
+			$d.="<span style=\"font-size: 10pt; font-weight: bold;\">Total: ".$ht." horas</span><br>(+".round($htv)." Horas de trabajo voluntario)<br>";
 		}
 
 		// $d.="<span></span>";

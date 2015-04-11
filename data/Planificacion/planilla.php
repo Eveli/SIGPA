@@ -151,7 +151,7 @@
 			}
 
 			$sql="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/') uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$s'
@@ -169,11 +169,11 @@
 						on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm and uc.cc='$cc'
 				where c.p='$p' and p.c='1' and p.cat!='6'
 				group by p.a1, p.a2, p.n1, p.n2, pr.d, p.ci, d.abrv, cat.d
-				order by p.a1
+				order by p.a1, p.n1
 			";
 
 			$sql2="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/') uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$s'
@@ -191,11 +191,11 @@
 						on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm and uc.cc='$cc'
 				where c.p='$p' and p.c='1' and p.cat='6'
 				group by p.a1, p.a2, p.n1, p.n2, pr.d, p.ci, d.abrv, cat.d
-				order by p.a1
+				order by p.a1, p.n1
 			";
 
 			$sql3="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/') uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$s'
@@ -213,7 +213,7 @@
 						on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm and uc.cc='$cc'
 				where c.p='$p' and p.c='3'
 				group by p.a1, p.a2, p.n1, p.n2, pr.d, p.ci, d.abrv, cat.d
-				order by p.a1
+				order by p.a1, p.n1
 			";
 		break;
 
@@ -251,7 +251,7 @@
 			$x=pg_fetch_object($ejec);
 
 			$sql="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/') uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$x->s'
@@ -269,11 +269,11 @@
 						on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm and uc.cc='$x->cc'
 				where c.p='$p' and p.c='1' and p.cat!='6'
 				group by p.a1, p.a2, p.n1, p.n2, pr.d, p.ci, d.abrv, cat.d, d.h
-				order by p.a1
+				order by p.a1, p.n1
 			";
 
 			$sql2="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/') uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$x->s'
@@ -291,11 +291,11 @@
 						on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm and uc.cc='$x->cc'
 				where c.p='$p' and p.c='1' and p.cat='6'
 				group by p.a1, p.a2, p.n1, p.n2, pr.d, p.ci, d.abrv, cat.d, d.h
-				order by p.a1
+				order by p.a1, p.n1
 			";
 
 			$sql3="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/') uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$x->s'
@@ -313,7 +313,7 @@
 						on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm and uc.cc='$x->cc'
 				where c.p='$p' and p.c='3'
 				group by p.a1, p.a2, p.n1, p.n2, pr.d, p.ci, d.abrv, cat.d, d.h
-				order by p.a1
+				order by p.a1, p.n1
 			";
 ?>
 
@@ -364,7 +364,7 @@
 
 <table class="tab_index">
 	<tr>
-		<th colspan=9>PERSONAL DOCENTE ORDINARIO</th>
+		<th colspan=10>PERSONAL DOCENTE ORDINARIO</th>
 	</tr>
 	<tr>
 		<th rowspan=2 style="color: #0000cb;">
@@ -392,7 +392,11 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Total
+			Horas semanales
+		</th>
+
+		<th rowspan=2 style="color: #0000cb;">
+			Total horas
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -415,6 +419,8 @@
 		{
 			$uc=explode("/", $car->uc);
 			$cuc=count($uc);
+
+			$th=0;
 
 			for($i=0; $i<$cuc; ++$i)
 			{
@@ -454,7 +460,7 @@
 					echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
 				}
 
-				echo ") (Malla $uc2[8])
+				echo ")
 		</td>
 
 		<td>
@@ -476,6 +482,8 @@
 
 				if($i==0)
 				{
+					echo "<td rowspan=".$cuc." id=\"td$car->ci\"></td>";
+
 					$sql="select d from observacion where ci='$car->ci' and p='$p'";
 					$ejec2=pg_query($sigpa, $sql);
 
@@ -490,16 +498,18 @@
 
 		<td <?= "rowspan=\"$cuc\""; ?> style="text-align: center; position: relative; font-size: 8pt;" >
 			
-			<?php $sql="select p.h, d.h
-						from profesor p 
-						join dedicacion d 
-							on p.ded=d.ded and p.ci='$car->ci'";
-			
-			$ejec3=pg_query($sigpa, $sql);
-			
-			while($h=pg_fetch_object($ejec3))
-			{
-				?>
+<?php
+						$sql="
+							select p.h, d.h
+								from profesor p 
+								join dedicacion d 
+							on p.ded=d.ded and p.ci='$car->ci'
+						";
+						$ejec3=pg_query($sigpa, $sql);
+
+						while($h=pg_fetch_object($ejec3))
+						{
+?>
 		
 				<div contenteditable="true" <?= "OnBlur=\"obs('$car->ci', this.innerHTML)\" id=\"Obs$car->ci\""; ?> maxlength=500 style="margin-bottom: 50px; min-height: 5em; font-size: 8pt;"><?= $ob->d; ?></div>
 				<img class="bt_opc" src="css/img/rest.png" <?= "OnClick=\"restaurar('$car->ci')\""; ?> style="position: absolute; bottom: 5px; left: 40%" title="Restaurar valor actual" />
@@ -511,17 +521,21 @@
 		</td>
 
 <?php
+						}
 					}
-				}
 ?>
 
 	</tr>
 
 <?php
 
+				}
+
+				$th+=$uc2[4]+$uc2[5];
 			}
+
+			echo "<script> getID(\"td$car->ci\").innerHTML=\"$th\"; </script>";
 		}
-	}
 ?>
 
 </table>
@@ -539,7 +553,7 @@
 <br/><br/>
 <table class="tab_index">
 	<tr>
-		<th colspan=9>PERSONAL AUXILIAR DOCENTE ORDINARIO</th>
+		<th colspan=10>PERSONAL AUXILIAR DOCENTE ORDINARIO</th>
 	</tr>
 	<tr>
 		<th rowspan=2 style="color: #0000cb;">
@@ -567,7 +581,11 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Total
+			Horas semanales
+		</th>
+
+		<th rowspan=2 style="color: #0000cb;">
+			Total horas
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -590,6 +608,8 @@
 		{
 			$uc=explode("/", $car->uc);
 			$cuc=count($uc);
+
+			$th=0;
 
 			for($i=0; $i<$cuc; ++$i)
 			{
@@ -629,7 +649,7 @@
 					echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
 				}
 
-				echo ") (Malla $uc2[8])
+				echo ")
 		</td>
 
 		<td>
@@ -651,6 +671,8 @@
 
 				if($i==0)
 				{
+					echo "<td rowspan=".$cuc." id=\"td$car->ci\"></td>";
+
 					$sql="select d from observacion where ci='$car->ci' and p='$p'";
 					$ejec2=pg_query($sigpa, $sql);
 
@@ -695,7 +717,11 @@
 <?php
 
 			}
+
+			$th+=$uc2[4]+$uc2[5];
 		}
+
+		echo "<script> getID(\"td$car->ci\").innerHTML=\"$th\"; </script>";
 	}
 ?>
 
@@ -714,7 +740,7 @@
 <br/><br/>
 <table class="tab_index">
 	<tr>
-		<th colspan=9>PERSONAL DOCENTE CONTRATADO</th>
+		<th colspan=10>PERSONAL DOCENTE CONTRATADO</th>
 	</tr>
 	<tr>
 		<th rowspan=2 style="color: #0000cb;">
@@ -742,7 +768,11 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Total
+			Horas semanales
+		</th>
+
+		<th rowspan=2 style="color: #0000cb;">
+			Total horas
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -765,6 +795,8 @@
 		{
 			$uc=explode("/", $car->uc);
 			$cuc=count($uc);
+
+			$th=0;
 
 			for($i=0; $i<$cuc; ++$i)
 			{
@@ -804,7 +836,7 @@
 					echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
 				}
 
-				echo ") (Malla $uc2[8])
+				echo ")
 		</td>
 
 		<td>
@@ -826,6 +858,8 @@
 
 				if($i==0)
 				{
+					echo "<td rowspan=".$cuc." id=\"td$car->ci\"></td>";
+
 					$sql="select d from observacion where ci='$car->ci' and p='$p'";
 					$ejec2=pg_query($sigpa, $sql);
 
@@ -870,7 +904,11 @@
 <?php
 
 			}
+
+			$th+=$uc2[4]+$uc2[5];
 		}
+
+		echo "<script> getID(\"td$car->ci\").innerHTML=\"$th\"; </script>";
 	}
 ?>
 

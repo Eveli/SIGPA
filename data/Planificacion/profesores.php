@@ -38,7 +38,7 @@
 			select pro.ci ci, pro.n1 n1, pro.a1 a1, d.h-pro.h h
 			from perfil per
 				join profesor pro
-					on pro.ci=per.ci and pro.c='$c' and pro.s='$cord->s' and pro.ci!='$_SESSION[ci]'
+					on pro.ci=per.ci and pro.c='$c' and pro.s='$cord->s'
 				join dedicacion d
 					on d.ded=pro.ded
 			where cuc='$cuc'

@@ -23,7 +23,7 @@
 
 <a href="/SIGPA/?r=data/Planificacion/planilla.php">Ver Planilla</a><br /><br />
 
-<select id="trayecto" OnChange="if(this.value==0) getID('trimestre').style.display='none'; else getID('trimestre').style.display='inline'; plan();">
+<select id="trayecto" OnChange="(this.value==0) ? getID('trimestre').attr('disabled') : getID('trimestre').noattr('disabled'); plan();">
 	<option value="">Trayecto</option>
 	<option value="0" <?php if($_GET["t"]=='0') echo "selected='selected'"; ?> >Trayecto Inicial</option>
 	<option value="1" <?php if($_GET["t"]==1) echo "selected='selected'"; ?> >Trayecto I</option>
@@ -32,7 +32,7 @@
 	<option value="4" <?php if($_GET["t"]==4) echo "selected='selected'"; ?> >Trayecto IV</option>
 </select>
 
-<select id="trimestre" style="display: none;" OnChange="plan()">
+<select id="trimestre" OnChange="plan()">
 	<option value="">Trimestre</option>
 	<option value="1" <?php if($_GET["tr"]==1) echo "selected='selected'"; ?> >Trimestre I</option>
 	<option value="2" <?php if($_GET["tr"]==2) echo "selected='selected'"; ?> >Trimestre II</option>
@@ -199,10 +199,12 @@
 				}
 			}
 
-			if(confirm("Esta es una sección nocturna?"))
+			if(confirm("Esta es una sección nocturna o de fin de semana?"))
 			{
 				ht*=1.5;
 				hp*=1.5;
+				ht=Math.round(ht);
+				hp=Math.round(hp);
 				sec+="*";
 			}
 
@@ -215,20 +217,20 @@
 					if(confirm("Las horas teóricas también se dividiran en grupos?"))
 					{
 						ht*=2;
-						sec+=id+"1-"+id+"2<br>";
+						sec+=id+"1-"+id+"2 ";
 					}
 
 					else
-						sec+=id+"("+id+"1-"+id+"2)<br>";
+						sec+=id+"("+id+"1-"+id+"2) ";
 				}
 
 				else
-					sec+=id+"<br>";
+					sec+=id+" ";
 			}
 
 			else
 			{
-				sec+=id+"<br>";
+				sec+=id+" ";
 			}
 
 			this.value=sec+"/"+ht+"-"+hp;

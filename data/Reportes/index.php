@@ -18,7 +18,7 @@
 	<style type="text/css">
 		*
 		{
-			text-transform: uppercase;
+			/*text-transform: uppercase;*/
 			font-size: 6pt;
 		}
 
