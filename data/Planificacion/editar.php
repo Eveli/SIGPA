@@ -43,9 +43,9 @@
 
 	$carga=pg_fetch_object($ejec);
 
-	$secC=explode("&nbsp;", $carga->s);
+	$secC=explode("<br>", $carga->s);
 
-	for($i=0; $i<(count($secC)-1); ++$i)
+	for($i=0; $i<count($secC); ++$i)
 	{
 		$l=strlen($secC[$i]);
 		$id=substr($secC[$i], $l-1, 1);
