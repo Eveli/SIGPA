@@ -80,6 +80,10 @@
 
 		</select> <span class="requerido">*</span><br /><br />
 
+		<label><input type="radio" name="re" value="Esp."> Esp.</label>
+		<label><input type="radio" name="re" value="MSc."> MSc.</label>
+		<label><input type="radio" name="re" value="PhD."> PhD.</label><br/><br/>
+
 		<span class="inputLength">
 			<input type="text" name="ce" placeholder="Correo" maxlength=80 title="Correo" OnKeyUp="VAL.call(this, event, /[a-zA-Z0-9@._-]/, 'Siga el esquema abc123@ejemplo.com', true); inputLength.call(this, true);" OnFocus="inputLength.call(this, true)" OnBlur="inputLength.call(this)" />
 		</span><br /><br />

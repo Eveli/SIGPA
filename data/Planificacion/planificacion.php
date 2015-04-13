@@ -7,8 +7,12 @@
 	extract($_POST);
 
 	if($t==0)
-	{
 		$tr=1;
+
+	else if($t==5)
+	{
+		$t=0;
+		$tr=2;
 	}
 
 	$sql="select p from carga order by p desc limit 1";
@@ -59,6 +63,7 @@
 	</td>
 
 	<td style="text-align: center;">
+		<?= "<img src=\"css/img/editar.png\" class=\"bt_opc\" title=\"Modificar esta carga\" OnClick=\"abrir_editar_carga('$uc->cuc', '$prof->ci', '$p->p', getID('trimestre').value, '$cm')\" />"; ?>
 		<?= "<img src=\"css/img/eliminar.png\" class=\"bt_opc\" title=\"Eliminar esta carga del profesor\" OnClick=\"eliminar(this, '$prof->ci', '$uc->cuc', '$p->p', '$prof->h')\" />"; ?>
 	</td>
 </tr>

@@ -127,6 +127,10 @@
 
 		</select> <span class="requerido">*</span><br /><br />
 
+		<label><input type="radio" name="re" value="Esp." <?php if($prof->re=="Esp.") echo "checked=\"checked\""; ?> > Esp.</label>
+		<label><input type="radio" name="re" value="MSc." <?php if($prof->re=="MSc.") echo "checked=\"checked\""; ?>> MSc.</label>
+		<label><input type="radio" name="re" value="PhD." <?php if($prof->re=="PhD.") echo "checked=\"checked\""; ?>> PhD.</label><br/><br/>
+
 		Correo electrónico:<br/>
 		<span class="inputLength">
 			<input type="text" name="ce" <?= "value=\"$prof->ce\"" ?> placeholder="Correo" maxlength=80 title="Correo" OnKeyUp="VAL.call(this, event, /[a-zA-Z0-9@._-]/, 'Siga el esquema abc123@ejemplo.com', true); inputLength.call(this, true);" OnFocus="inputLength.call(this, true)" OnBlur="inputLength.call(this)" />

@@ -151,7 +151,7 @@
 			}
 
 			$sql="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.re re, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$s'
@@ -173,7 +173,7 @@
 			";
 
 			$sql2="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.re re, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$s'
@@ -195,7 +195,7 @@
 			";
 
 			$sql3="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.re re, pr.d prof, p.ci ci, d.abrv ded, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$s'
@@ -251,7 +251,7 @@
 			$x=pg_fetch_object($ejec);
 
 			$sql="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.re re, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$x->s'
@@ -273,7 +273,7 @@
 			";
 
 			$sql2="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.re re, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$x->s'
@@ -295,7 +295,7 @@
 			";
 
 			$sql3="
-				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
+				select p.a1 a1, p.a2 a2, p.n1 n1, p.n2 n2, p.re re, p.h h, pr.d prof, p.ci ci, d.abrv ded, d.h dh, cat.d cat, string_agg(concat_ws(',', uc.d, uc.t, uc.tr, c.s, c.ht, c.hp, uc.ht, uc.hp, uc.cm), '/' order by uc.d, uc.t, uc.tr) uc
 				from carga c
 					join profesor p
 						on p.ci=c.ci and p.s='$x->s'
@@ -435,7 +435,7 @@
 		<td rowspan=".$cuc.">
 			$car->a1 $car->a2<br/>
 			$car->n1 $car->n2<br/>
-			$car->prof<br/>
+			$car->prof. $car->re<br/>
 			C.I: $car->ci
 		</td>
 
@@ -624,7 +624,7 @@
 		<td rowspan=".$cuc.">
 			$car->a1 $car->a2<br/>
 			$car->n1 $car->n2<br/>
-			$car->prof<br/>
+			$car->prof. $car->re<br/>
 			C.I: $car->ci
 		</td>
 
@@ -811,7 +811,7 @@
 		<td rowspan=".$cuc.">
 			$car->a1 $car->a2<br/>
 			$car->n1 $car->n2<br/>
-			$car->prof<br/>
+			$car->prof. $car->re<br/>
 			C.I: $car->ci
 		</td>
 

@@ -17,6 +17,7 @@
 	$c=$_POST["c"];
 	$cat=$_POST["cat"];
 	$ded=$_POST["ded"];
+	$re=$_POST["re"];
 	$ce=strtoupper($_POST["ce"]);
 	$tf=$_POST["tf"];
 	$tm=$_POST["tm"];
@@ -26,7 +27,7 @@
 
 	$cord=pg_fetch_object($ejec);
 
-	$sql="insert into profesor values('$ci', '$n1', '$n2', '$a1', '$a2', '$c', '$cat', '$ded', '$cord->s', '$ce', '$tf', '$tm')";
+	$sql="insert into profesor values('$ci', '$n1', '$n2', '$a1', '$a2', '$c', '$cat', '$ded', '$cord->s', '$ce', '$tf', '$tm', 0, '$re')";
 	$ejec=pg_query($sigpa, $sql);
 
 	if($ejec)

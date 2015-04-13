@@ -13,6 +13,12 @@
 	if($t==0)
 		$tr=1;
 
+	else if($t==5)
+	{
+		$t=0;
+		$tr=2;
+	}
+
 	$sql="select p from carga order by p desc limit 1";
 	$ejec=pg_query($sigpa, $sql);
 

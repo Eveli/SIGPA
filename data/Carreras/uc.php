@@ -48,6 +48,42 @@
 	</tr>
 </table><br />
 
+<table class="tab_index">
+	<tr>
+		<th>Trayecto Transición</th>
+	</tr>
+
+<?php
+	$sql="
+		select uc.cuc cuc, uc.d d, uc.ht ht, uc.hp hp, uc.lab lab
+		from malla m
+			join uc
+				on uc.cm=m.cm and uc.cc=m.cc and uc.t='0' and uc.tr='2'
+		where m.cm='$_GET[cm]' and m.cc='$_GET[cc]' order by d
+	";
+	$ejec=pg_query($sigpa, $sql);
+	
+	while($uc=pg_fetch_object($ejec))
+	{
+?>
+
+	<tr>
+		<td <?= "OnClick=\"abrir_editar_uc('$uc->cuc')\"" ?> style="cursor: pointer;" >
+			<?= $uc->d; ?>
+		</td>
+	</tr>
+
+<?php
+	}
+?>
+
+	<tr>
+		<td style="text-align: center; color: #0000cb;">
+			<a href="javascript: abrir_nuc(0, 2)"><div title="Nueva unidad curricular">Nueva UC</div></a>
+		</td>
+	</tr>
+</table><br />
+
 <?php
 	$t=1;
 
@@ -176,6 +212,18 @@
 		document.uc.t.value=t;
 		document.uc.tr.value=tr;
 		document.uc.nt.max=4-tr;
+
+		if(t==0)
+		{
+			document.uc.nt.value=1;
+			document.uc.nt.parentNode.style.display="none";
+		}
+
+		else
+		{
+			document.uc.nt.value="";
+			document.uc.nt.parentNode.style.display="block";
+		}
 
 		getID("nuc").style.animation="abrir_sesion 0.5s forwards";
 		getID("nuc").style.WebkitAnimation="abrir_sesion 0.5s forwards";
@@ -333,8 +381,8 @@
 				<input type="text" name="d" placeholder="Nombre UC" maxlength=60 title="Nombre de la unidad curricular" OnKeyUp="VAL.call(this, event, 'text'); inputLength.call(this, true);" OnFocus="inputLength.call(this, true)" OnBlur="inputLength.call(this)" required="required" />
 			</span> <span class="requerido">*</span><br /><br />
 
-			<input type="number" name="nt" min=1 max=3 placeholder="Número de trimestres" maxlength=1 title="Número de trimestres" OnKeyUp="VAL.call(this, event, 'num')" required="required" />
-			<span class="requerido">*</span><br /><br />
+			<span><input type="number" name="nt" min=1 max=3 placeholder="Número de trimestres" maxlength=1 title="Número de trimestres" OnKeyUp="VAL.call(this, event, 'num')" required="required" />
+			<span class="requerido">*</span><br /><br /></span>
 
 			<span class="inputLength">
 				<input type="text" name="ht" placeholder="Horas teoricas" maxlength=2 title="Horas teoricas" OnKeyUp="VAL.call(this, event, 'num'); inputLength.call(this, true);" OnFocus="inputLength.call(this, true)" OnBlur="inputLength.call(this)" required="required" />

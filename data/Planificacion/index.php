@@ -23,16 +23,17 @@
 
 <a href="/SIGPA/?r=data/Planificacion/planilla.php">Ver Planilla</a><br /><br />
 
-<select id="trayecto" OnChange="(this.value==0) ? getID('trimestre').attr('disabled') : getID('trimestre').noattr('disabled'); plan();">
+<select id="trayecto" OnChange="((this.value==0)||(this.value==5)) ? getID('trimestre').attr('disabled') : getID('trimestre').noattr('disabled'); if(this.value==0) getID('trimestre').value=1; else if(this.value==5) getID('trimestre').value=2; plan();">
 	<option value="">Trayecto</option>
-	<option value="0" <?php if($_GET["t"]=='0') echo "selected='selected'"; ?> >Trayecto Inicial</option>
+	<option value="0" <?php if(($_GET["t"]=='0')&&($_GET["tr"]==1)) echo "selected='selected'"; ?> >Trayecto Inicial</option>
+	<option value="5" <?php if(($_GET["t"]=='0')&&($_GET["tr"]==2)) echo "selected=\"selected\""; ?>>Trayecto Transición</option>
 	<option value="1" <?php if($_GET["t"]==1) echo "selected='selected'"; ?> >Trayecto I</option>
 	<option value="2" <?php if($_GET["t"]==2) echo "selected='selected'"; ?> >Trayecto II</option>
 	<option value="3" <?php if($_GET["t"]==3) echo "selected='selected'"; ?> >Trayecto III</option>
 	<option value="4" <?php if($_GET["t"]==4) echo "selected='selected'"; ?> >Trayecto IV</option>
 </select>
 
-<select id="trimestre" OnChange="plan()">
+<select id="trimestre" OnChange="plan()" <?php if($_GET["t"]==0) echo "disabled='disabled'"; ?>>
 	<option value="">Trimestre</option>
 	<option value="1" <?php if($_GET["tr"]==1) echo "selected='selected'"; ?> >Trimestre I</option>
 	<option value="2" <?php if($_GET["tr"]==2) echo "selected='selected'"; ?> >Trimestre II</option>
@@ -145,6 +146,7 @@
 
 	function cerrar_asig()
 	{
+		getID("cuerpo_asig").innerHTML="";
 		getID("asig").style.animation="cerrar_sesion 0.5s forwards";
 		getID("asig").style.WebkitAnimation="cerrar_sesion 0.5s forwards";
 	}
@@ -182,14 +184,10 @@
 			var sec="", id=this.dataset.sec;
 
 			var t=getID("trayecto").value;
+			var tr=getID("trimestre").value;
 
-			if(t==0)
-			{
-				if(confirm("Esta es una sección de prosecución?"))
-				{
-					sec+="(Transición) ";
-				}
-			}
+			if((t==5)&&(tr==2))
+				sec+="(Transición) ";
 
 			else if((t=='III')||(t=='IV'))
 			{
@@ -217,20 +215,20 @@
 					if(confirm("Las horas teóricas también se dividiran en grupos?"))
 					{
 						ht*=2;
-						sec+=id+"1-"+id+"2 ";
+						sec+=id+"1-"+id+"2&nbsp;";
 					}
 
 					else
-						sec+=id+"("+id+"1-"+id+"2) ";
+						sec+=id+"("+id+"1-"+id+"2)&nbsp;";
 				}
 
 				else
-					sec+=id+" ";
+					sec+=id+"&nbsp;";
 			}
 
 			else
 			{
-				sec+=id+" ";
+				sec+=id+"&nbsp;";
 			}
 
 			this.value=sec+"/"+ht+"-"+hp;
@@ -316,7 +314,13 @@
 
 		var f=new FormData(f);
 
-		f.append("t", getID("trayecto").value);
+		if(getID("trayecto").value==5)
+			t=0;
+
+		else
+			t=getID("trayecto").value;
+
+		f.append("t", t);
 		f.append("tr", getID("trimestre").value);
 		f.append("cm", getID("malla").value);
 
@@ -327,7 +331,7 @@
 					var f=document.carga;
 
 					if(this.responseText=="1")
-						window.location.href="?r=data/Planificacion/index.php&t="+getID("trayecto").value+"&tr="+getID("trimestre").value+"&cm="+getID("malla").value;
+						window.location.href="?r=data/Planificacion/index.php&t="+t+"&tr="+getID("trimestre").value+"&cm="+getID("malla").value;
 
 					else
 					{
@@ -350,6 +354,12 @@
 
 	function eliminar(img, ci, cuc, p, h)
 	{
+		if(getID("trayecto").value==5)
+			t=0;
+
+		else
+			t=getID("trayecto").value;
+
 		var x=new ajax_req(function ()
 			{
 				img.src="css/img/cargando.gif";
@@ -358,7 +368,7 @@
 				if((this.statusText=="OK")&&(this.readyState==4))
 				{
 					if(this.responseText==1)
-						window.location.href="?r=data/Planificacion/index.php&t="+getID("trayecto").value+"&tr="+getID("trimestre").value+"&cm="+getID("malla").value;
+						window.location.href="?r=data/Planificacion/index.php&t="+t+"&tr="+getID("trimestre").value+"&cm="+getID("malla").value;
 
 					else
 					{
@@ -367,7 +377,7 @@
 						img.title="Eliminar Carga";
 					}
 				}
-			}, "data/Planificacion/eliminar.php", "POST", "ci="+ci+"&cuc="+cuc+"&p="+p+"&h="+h+"&t="+getID('trayecto').value+"&tr="+getID('trimestre').value+"&cm="+getID('malla').value);
+			}, "data/Planificacion/eliminar.php", "POST", "ci="+ci+"&cuc="+cuc+"&p="+p+"&h="+h+"&tr="+getID('trimestre').value+"&cm="+getID('malla').value);
 	}
 
 	function abrir_carga(ci, cc)
@@ -391,6 +401,7 @@
 
 	function cerrar_carga()
 	{
+		getID("cuerpo_carga").innerHTML="";
 		getID("carga").style.animation="cerrar_sesion 0.5s forwards";
 		getID("carga").style.WebkitAnimation="cerrar_sesion 0.5s forwards";
 	}
@@ -432,6 +443,188 @@
 			}, "data/Planificacion/nsec.php", "POST", "id="+v);
 		}
 	}
+
+	function abrir_editar_carga(cuc, ci, p, tr, cm)
+	{
+			// Abrir el PopUp con animación
+		getID("editar_carga").style.animation="abrir_sesion 0.5s forwards";
+		getID("editar_carga").style.WebkitAnimation="abrir_sesion 0.5s forwards";
+
+		var carga=new ajax_req(function ()
+		{
+			if((this.statusText=="OK")&&(this.readyState==4))
+			{
+				if(this.responseText)
+				{
+					getID("cuerpo_editar_carga").className="alerta";
+					getID("cuerpo_editar_carga").innerHTML=this.responseText;
+				}
+
+				else
+					alert("Ocurrio un error, vuelva a intentarlo");
+			}
+		}, "data/Planificacion/editar.php", "POST", "cuc="+cuc+"&ci="+ci+"&p="+p+"&tr="+tr+"&cm="+cm);
+	}
+
+	function cerrar_editar_carga()
+	{
+		getID("cuerpo_editar_carga").innerHTML="";
+		getID("editar_carga").style.animation="cerrar_sesion 0.5s forwards";
+		getID("editar_carga").style.WebkitAnimation="cerrar_sesion 0.5s forwards";
+	}
+
+	function cuenta_editar()
+	{
+		var f=document.carga;
+
+		if(this.checked)
+		{
+			var ht=parseFloat(f.uc_ht.value);
+			var hp=parseFloat(f.uc_hp.value);
+			var sec="", id=this.dataset.sec;
+
+			var t=getID("trayecto").value;
+			var tr=getID("trimestre").value;
+
+			if((t==5)&&(tr==2))
+				sec+="(Transición) ";
+
+			else if((t=='III')||(t=='IV'))
+			{
+				if(confirm("Esta es una sección de prosecución?"))
+				{
+					sec+="(Prosecución) ";
+				}
+			}
+
+			if(confirm("Esta es una sección nocturna o de fin de semana?"))
+			{
+				ht*=1.5;
+				hp*=1.5;
+				ht=Math.round(ht);
+				hp=Math.round(hp);
+				sec+="*";
+			}
+
+			if(hp>0)
+			{
+				if(confirm("Las horas prácticas se dividiran en grupos?"))
+				{
+					hp*=2;
+
+					if(confirm("Las horas teóricas también se dividiran en grupos?"))
+					{
+						ht*=2;
+						sec+=id+"1-"+id+"2&nbsp;";
+					}
+
+					else
+						sec+=id+"("+id+"1-"+id+"2)&nbsp;";
+				}
+
+				else
+					sec+=id+"&nbsp;";
+			}
+
+			else
+			{
+				sec+=id+"&nbsp;";
+			}
+
+			this.value=sec+"/"+ht+"-"+hp;
+			f.ht.value=parseFloat(f.ht.value)+ht;
+			f.hp.value=parseFloat(f.hp.value)+hp;
+
+			getID("h").innerHTML=parseFloat(getID("h").innerHTML)-(ht+hp);
+		}
+
+		else
+		{
+			var h=this.value.split("/");
+			h=h[1].split("-");
+
+			var ht=parseFloat(h[0]);
+			var hp=parseFloat(h[1]);
+
+			this.value="";
+			f.ht.value-=ht;
+			f.hp.value-=hp;
+
+			getID("h").innerHTML=parseFloat(getID("h").innerHTML)+(ht+hp);
+		}
+	}
+
+	function editar_carga()
+	{
+		var f=document.carga;
+
+		var check=document.getElementsByName("sec[]");
+		var checked="";
+
+		for(var i=0; i<check.length; ++i)
+		{
+			if(check[i].checked)
+			{
+				checked=true;
+				break;
+			}
+		}
+
+		if(!checked)
+		{
+			alert("Debe seleccionar al menos una sección");
+			return false;
+		}
+
+		getID("bt_carga").attr("disabled");
+
+		var aux=new Array();
+
+		for(var i=0; i<check.length; ++i)
+		{
+			aux[i]=check[i].value;
+
+			var v=check[i].value.split("/");
+			check[i].value=v[0];
+		}
+
+		var f=new FormData(f);
+
+		if(getID("trayecto").value==5)
+			t=0;
+
+		else
+			t=getID("trayecto").value;
+
+		f.append("t", t);
+		f.append("tr", getID("trimestre").value);
+		f.append("cm", getID("malla").value);
+
+		new ajax_req(function ()
+		{
+			if((this.statusText=="OK")&&(this.readyState==4))
+			{
+				var f=document.carga;
+
+				if(this.responseText=="1")
+					window.location.href="?r=data/Planificacion/index.php&t="+t+"&tr="+getID("trimestre").value+"&cm="+getID("malla").value;
+
+				else
+				{
+					alert(this.responseText);
+
+					for(var i=0; i<check.length; ++i)
+					{
+						check[i].value=aux[i];
+					}
+				}
+
+				getID("bt_carga").attr("enabled");
+			}
+		}, "data/Planificacion/guardar_editar.php", "POST", f);
+
+		return false;
+	}
 </script>
 
 <div class="falerta" id="asig">
@@ -448,4 +641,10 @@
 	<div class="alerta" id="cuerpo_carga" style="width: 700px;">
 		
 	</div>
+</div>
+
+<div class="falerta" id="editar_carga">
+	<div class="cerrar_alerta" OnClick="cerrar_editar_carga()"></div>
+
+	<div class="alerta cargando" id="cuerpo_editar_carga" style="min-height: 300px;">Cargando..</div>
 </div>

@@ -35,12 +35,7 @@
 	$ht=$_POST["ht"];
 	$hp=$_POST["hp"];
 	$t=$_POST["t"];
-
-	if($t==0)
-		$tr=1;
-
-	else
-		$tr=$_POST["tr"];
+	$tr=$_POST["tr"];
 
 	$cm=$_POST["cm"];
 

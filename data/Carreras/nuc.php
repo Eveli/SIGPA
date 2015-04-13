@@ -15,10 +15,7 @@
 	do
 	{
 		if($t==0)
-		{	
-			$tr=1;
 			$nt=1;
-		}
 
 		$sql="insert into uc values('$cuc', '$d', '$t', '$tr', '$ht', '$hp', '$ce', '$cc', '$cm', '$lab')";
 		$ejec=pg_query($sigpa, $sql);

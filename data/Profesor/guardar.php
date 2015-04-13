@@ -18,6 +18,7 @@
 	$c=$_POST["c"];
 	$cat=$_POST["cat"];
 	$ded=$_POST["ded"];
+	$re=$_POST["re"];
 	$ce=strtoupper($_POST["ce"]);
 	$tf=$_POST["tf"];
 	$tm=$_POST["tm"];
@@ -27,7 +28,7 @@
 
 	$cord=pg_fetch_object($ejec);
 
-	$sql="update profesor set ci='$ci', n1='$n1', n2='$n2', a1='$a1', a2='$a2', c='$c', cat='$cat', ded='$ded', s='$cord->s', ce='$ce', tf='$tf', tm='$tm' where ci='$ci_ant'";
+	$sql="update profesor set ci='$ci', n1='$n1', n2='$n2', a1='$a1', a2='$a2', c='$c', cat='$cat', ded='$ded', s='$cord->s', ce='$ce', tf='$tf', tm='$tm', re='$re' where ci='$ci_ant'";
 	$ejec=pg_query($sigpa, $sql);
 
 	if($ejec)

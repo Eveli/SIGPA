@@ -6,9 +6,6 @@
 
 	extract($_POST);
 
-	if($t==0)
-		$tr=1;
-
 	$sql="delete from carga where cuc='$cuc' and ci='$ci' and p='$p' and tr='$tr' and cm='$cm'";
 	$ejec=pg_query($sigpa, $sql);
 

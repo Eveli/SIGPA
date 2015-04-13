@@ -78,7 +78,7 @@
 				$ejec2=pg_query($sigpa, $sql);
 				$dc=pg_fetch_object($ejec2);
 
-				$d.="+".round($h)." $dc->d<br>";
+				$d.="+$h $dc->d<br>";
 			}
 		}
 
@@ -101,7 +101,7 @@
 		else
 		{
 			$htv=($h->hd-$h->h)*-1;
-			$d.="<span style=\"font-size: 10pt; font-weight: bold;\">Total: ".$ht." horas</span><br>(+".round($htv)." Horas de trabajo voluntario)<br>";
+			$d.="<span style=\"font-size: 10pt; font-weight: bold;\">Total: ".$ht." horas</span><br>(+$htv Horas de trabajo voluntario)<br>";
 		}
 
 		// $d.="<span></span>";

@@ -31,23 +31,24 @@
 
 	Trayecto: <br/>
 	<select name="t" required="required">
-		<option value="0" <?php if($uc->t==0) echo "selected=\"selected\""; ?>>Trayecto Inicial</option>
+		<option value="0" <?php if(($uc->t==0)&&($uc->tr==1)) echo "selected=\"selected\""; ?>>Trayecto Inicial</option>
+		<option value="5" <?php if(($uc->t==0)&&($uc->tr==2)) echo "selected=\"selected\""; ?>>Trayecto Transición</option>
 		<option value="1" <?php if($uc->t==1) echo "selected=\"selected\""; ?>>Trayecto I</option>
 		<option value="2" <?php if($uc->t==2) echo "selected=\"selected\""; ?>>Trayecto II</option>
 		<option value="3" <?php if($uc->t==3) echo "selected=\"selected\""; ?>>Trayecto III</option>
 		<option value="4" <?php if($uc->t==4) echo "selected=\"selected\""; ?>>Trayecto IV</option>
 	</select> <span class="requerido">*</span><br /><br />
 
-	Trimestre: <br/>
+	<span <?php if($uc->t==0) echo "style=\"display: none;\"" ?>>Trimestre: <br/>
 	<select name="tr" OnChange="getID('nt').max=4-this.value;" required="required">
 		<option value="1" <?php if($uc->tr==1) echo "selected=\"selected\""; ?>>Trimestre I</option>
 		<option value="2" <?php if($uc->tr==2) echo "selected=\"selected\""; ?>>Trimestre II</option>
 		<option value="3" <?php if($uc->tr==3) echo "selected=\"selected\""; ?>>Trimestre III</option>
-	</select> <span class="requerido">*</span><br /><br />
+	</select> <span class="requerido">*</span><br /><br /></span>
 
-	Número de trimestres: <br/>
+	<span <?php if($uc->t==0) echo "style=\"display: none;\"" ?>>Número de trimestres: <br/>
 	<input type="number" name="nt" <?= "value=\"".pg_affected_rows($ejec)."\"" ?> min=1 max=3 placeholder="Número de trimestres" maxlength=1 title="Número de trimestres" OnKeyUp="VAL.call(this, event, 'num')" required="required" />
-	<span class="requerido">*</span><br /><br />
+	<span class="requerido">*</span><br /><br /></span>
 
 	Horas teóricas: <br/>
 	<span class="inputLength">
