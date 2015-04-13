@@ -11,8 +11,8 @@
 	<script src="lib/js/sigpa.js"></script>
 
 		<!-- Llamado del Framework -->
-	<script src="MWork/mwork.js"></script>
-	<link rel="stylesheet" type="text/css" href="MWork/mwork.css" />
+	<script src="lib/MWork/mwork.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/MWork/mwork.css" />
 </head>
 <body>
 
