@@ -215,20 +215,20 @@
 					if(confirm("Las horas teóricas también se dividiran en grupos?"))
 					{
 						ht*=2;
-						sec+=id+"1-"+id+"2&nbsp;";
+						sec+=id+"1-"+id+"2<br>";
 					}
 
 					else
-						sec+=id+"("+id+"1-"+id+"2)&nbsp;";
+						sec+=id+"("+id+"1-"+id+"2)<br>";
 				}
 
 				else
-					sec+=id+"&nbsp;";
+					sec+=id+"<br>";
 			}
 
 			else
 			{
-				sec+=id+"&nbsp;";
+				sec+=id+"<br>";
 			}
 
 			this.value=sec+"/"+ht+"-"+hp;
@@ -515,20 +515,20 @@
 					if(confirm("Las horas teóricas también se dividiran en grupos?"))
 					{
 						ht*=2;
-						sec+=id+"1-"+id+"2&nbsp;";
+						sec+=id+"1-"+id+"2<br>";
 					}
 
 					else
-						sec+=id+"("+id+"1-"+id+"2)&nbsp;";
+						sec+=id+"("+id+"1-"+id+"2)<br>";
 				}
 
 				else
-					sec+=id+"&nbsp;";
+					sec+=id+"<br>";
 			}
 
 			else
 			{
-				sec+=id+"&nbsp;";
+				sec+=id+"<br>";
 			}
 
 			this.value=sec+"/"+ht+"-"+hp;

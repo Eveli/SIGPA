@@ -43,7 +43,7 @@
 
 	$carga=pg_fetch_object($ejec);
 
-	$secC=explode("&nbsp;", $carga->s);
+	$secC=explode("<br>", $carga->s);
 
 	for($i=0; $i<(count($secC)-1); ++$i)
 	{
