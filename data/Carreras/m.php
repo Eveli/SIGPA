@@ -9,7 +9,13 @@
 
 	include "../../lib/conexion.php";
 
-	$cc=$_GET["cc"];
+	$ci=$_SESSION["ci"];
+	$s="select cc from coordinacion where ci='$ci'";
+	$e=pg_query($sigpa, $s);
+	
+	$c=pg_fetch_object($e);
+
+	$cc=$c->cc;
 
 	$sql="select * from carrera where cc='$cc'";
 	$ejec=pg_query($sigpa, $sql);
