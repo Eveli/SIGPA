@@ -52,7 +52,7 @@
 		$ht=$uc->ht;
 		$hp=$uc->hp;
 
-		if(strpos($secC[$i], "*"))
+		if(strpos($secC[$i], "*")!==false)
 		{
 			$ht*=1.5;
 			$hp*=1.5;
@@ -73,7 +73,7 @@
 			$hp*=2;
 		}
 
-		$secC[$id]="$secC[$i]/$ht-$hp";
+		$secC[$id]="$secC[$i]<br>/$ht-$hp";
 	}
 
 	$sql="select * from seccion order by id";

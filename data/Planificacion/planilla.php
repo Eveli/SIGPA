@@ -368,7 +368,8 @@
 	</tr>
 	<tr>
 		<th rowspan=2 style="color: #0000cb;">
-			Profesor
+			Profesor/cedula
+			Titulos obtenidos
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -380,11 +381,11 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Unidad Curricular
+			Unidad Curricular(es)
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Seccion
+			Secciones
 		</th>
 
 		<th colspan=2 style="color: #0000cb;">
@@ -396,7 +397,7 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Total horas
+			Total hor. acad
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -439,11 +440,11 @@
 			C.I: $car->ci
 		</td>
 
-		<td rowspan=".$cuc.">
+		<td rowspan=".$cuc." style=\"text-align: center;\">
 			$car->ded
 		</td>
 
-		<td rowspan=".$cuc.">
+		<td rowspan=".$cuc." style=\"text-align: center;\">
 			$car->cat
 		</td>
 					";
@@ -453,36 +454,48 @@
 
 				echo "
 		<td>
-			$uc2[0] (T$uc2[1]";
+			$uc2[0]";
 
-				if($uc2[1]!="0")
+				if(($uc2[1]=="0")&&($uc2[2]=="2"))
 				{
-					echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
+					echo " (Transición)";
 				}
 
-				echo ")
+				else
+				{
+					echo " (T$uc2[1]";
+
+					if($uc2[1]!="0")
+					{
+						echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
+					}
+
+					echo ")";
+				}
+
+				echo "
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[3]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[6]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[7]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			".round($uc2[4]+$uc2[5])."
 		</td>
 				";
 
 				if($i==0)
 				{
-					echo "<td rowspan=".$cuc." id=\"td$car->ci\"></td>";
+					echo "<td rowspan=".$cuc." id=\"td$car->ci\" style=\"text-align: center;\"></td>";
 
 					$sql="select d from observacion where ci='$car->ci' and p='$p'";
 					$ejec2=pg_query($sigpa, $sql);
@@ -557,7 +570,8 @@
 	</tr>
 	<tr>
 		<th rowspan=2 style="color: #0000cb;">
-			Profesor
+			Profesor/cedula
+			Titulos obtenidos
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -569,11 +583,11 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Unidad Curricular
+			Unidad Curricular(es)
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Seccion
+			Secciones
 		</th>
 
 		<th colspan=2 style="color: #0000cb;">
@@ -585,7 +599,7 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Total horas
+			Total hor. acad
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -628,11 +642,11 @@
 			C.I: $car->ci
 		</td>
 
-		<td rowspan=".$cuc.">
+		<td rowspan=".$cuc." style=\"text-align: center;\">
 			$car->ded
 		</td>
 
-		<td rowspan=".$cuc.">
+		<td rowspan=".$cuc." style=\"text-align: center;\">
 			$car->cat
 		</td>
 					";
@@ -642,36 +656,48 @@
 
 				echo "
 		<td>
-			$uc2[0] (T$uc2[1]";
+			$uc2[0]";
 
-				if($uc2[1]!="0")
+				if(($uc2[1]=="0")&&($uc2[2]=="2"))
 				{
-					echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
+					echo " (Transición)";
 				}
 
-				echo ")
+				else
+				{
+					echo " (T$uc2[1]";
+
+					if($uc2[1]!="0")
+					{
+						echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
+					}
+
+					echo ")";
+				}
+
+				echo "
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[3]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[6]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[7]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			".round($uc2[4]+$uc2[5])."
 		</td>
 				";
 
 				if($i==0)
 				{
-					echo "<td rowspan=".$cuc." id=\"td$car->ci\"></td>";
+					echo "<td rowspan=".$cuc." id=\"td$car->ci\" style=\"text-align: center;\"></td>";
 
 					$sql="select d from observacion where ci='$car->ci' and p='$p'";
 					$ejec2=pg_query($sigpa, $sql);
@@ -744,7 +770,8 @@
 	</tr>
 	<tr>
 		<th rowspan=2 style="color: #0000cb;">
-			Profesor
+			Profesor/cedula
+			Titulos obtenidos
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -756,11 +783,11 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Unidad Curricular
+			Unidad Curricular(es)
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Seccion
+			Secciones
 		</th>
 
 		<th colspan=2 style="color: #0000cb;">
@@ -772,7 +799,7 @@
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
-			Total horas
+			Total hor. acad
 		</th>
 
 		<th rowspan=2 style="color: #0000cb;">
@@ -815,11 +842,11 @@
 			C.I: $car->ci
 		</td>
 
-		<td rowspan=".$cuc.">
+		<td rowspan=".$cuc." style=\"text-align: center;\">
 			$car->ded
 		</td>
 
-		<td rowspan=".$cuc.">
+		<td rowspan=".$cuc." style=\"text-align: center;\">
 			$car->cat
 		</td>
 					";
@@ -829,36 +856,48 @@
 
 				echo "
 		<td>
-			$uc2[0] (T$uc2[1]";
+			$uc2[0]";
 
-				if($uc2[1]!="0")
+				if(($uc2[1]=="0")&&($uc2[2]=="2"))
 				{
-					echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
+					echo " (Transición)";
 				}
 
-				echo ")
+				else
+				{
+					echo " (T$uc2[1]";
+
+					if($uc2[1]!="0")
+					{
+						echo "<span style=\"text-transform: lowercase;\">t</span>"."$uc2[2]";
+					}
+
+					echo ")";
+				}
+
+				echo "
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[3]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[6]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			$uc2[7]
 		</td>
 
-		<td>
+		<td style=\"text-align: center;\">
 			".round($uc2[4]+$uc2[5])."
 		</td>
 				";
 
 				if($i==0)
 				{
-					echo "<td rowspan=".$cuc." id=\"td$car->ci\"></td>";
+					echo "<td rowspan=".$cuc." id=\"td$car->ci\" style=\"text-align: center;\"></td>";
 
 					$sql="select d from observacion where ci='$car->ci' and p='$p'";
 					$ejec2=pg_query($sigpa, $sql);

@@ -486,6 +486,7 @@ COPY coordinacion (ci, cc, s) FROM stdin;
 04319574	06	01
 11465653	07	01
 12779069	05	01
+11036485	09	01
 \.
 
 
@@ -792,6 +793,7 @@ COPY estudios (cp, ci) FROM stdin;
 016	17027780
 031	12352023
 003	14916156
+000	11036485
 \.
 
 
@@ -1304,6 +1306,8 @@ COPY historial (ci, d, f) FROM stdin;
 08041510	Se eliminó el respaldo 2015-04-13_12-45-07.sql	2015-04-13 12:54:11.792976
 08041510	Se eliminó el respaldo 2015-04-13_12-49-41.sql	2015-04-13 12:54:13.861407
 08041510	Se eliminó el respaldo nombre.sql	2015-04-13 12:54:15.895185
+08041510	Se restauró el respaldo 2015-04-13_12-54-17.sql	2015-04-13 20:37:42.851031
+08041510	Se agrego la carrera 09 a la sede 01 con Noraida gómez en la coordinación	2015-04-13 20:38:28.747496
 \.
 
 
@@ -1846,6 +1850,7 @@ COPY pertenece (ci, cc) FROM stdin;
 12352023	02
 14916156	02
 14916156	01
+11036485	09
 \.
 
 
@@ -2188,6 +2193,7 @@ COPY profesor (ci, n1, n2, a1, a2, c, cat, ded, s, ce, tf, tm, h, re) FROM stdin
 08047120	DIONY	GINETTE	ALVIAREZ	PAREDES	1	3	2	01	GDIONY@YAHOO.ES		04269770025	14	\N
 05655983	BLANCA	ELENA	ALVIAREZ	DE MALDONADO	1	3	2	01	BLANCALVI@GMAIL.COM		04167771000	14	\N
 12722185	SOLANGE	ANIREE	LEAL	LEAL	1	1	1	01	SOLANGELEAL@YAHOO.COM	0274-2623282	0416-2755134	8	\N
+11036485	Noraida		gómez		1	1	1	01				0	\N
 \.
 
 
@@ -3137,6 +3143,7 @@ COPY usuario (ci, pw, r, n) FROM stdin;
 12722185	1234	1234	2
 1234	4321	4321	1
 4321	1234	1234	2
+11036485	1234	1234	2
 \.
 
 

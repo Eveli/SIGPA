@@ -186,10 +186,7 @@
 			var t=getID("trayecto").value;
 			var tr=getID("trimestre").value;
 
-			if((t==5)&&(tr==2))
-				sec+="(Transición) ";
-
-			else if((t=='III')||(t=='IV'))
+			if((t=='3')||(t=='4'))
 			{
 				if(confirm("Esta es una sección de prosecución?"))
 				{
@@ -486,10 +483,7 @@
 			var t=getID("trayecto").value;
 			var tr=getID("trimestre").value;
 
-			if((t==5)&&(tr==2))
-				sec+="(Transición) ";
-
-			else if((t=='III')||(t=='IV'))
+			if((t=='3')||(t=='4'))
 			{
 				if(confirm("Esta es una sección de prosecución?"))
 				{

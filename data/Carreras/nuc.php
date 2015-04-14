@@ -12,6 +12,12 @@
 	extract($_POST);
 	$d=strtoupper($d);
 
+	$sql="select * from uc where cuc='$cuc'";
+	$ejec=pg_query($sigpa, $sql);
+
+	if(pg_affected_rows($ejec))
+		exit;
+
 	do
 	{
 		if($t==0)
