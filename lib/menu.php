@@ -31,6 +31,7 @@
 		case '2':
 ?>
 
+		<a href="?r=data/Carreras/index.php"><li> Malla </li></a>
 		<a href="?r=data/Profesor/index.php"><li> Profesores </li></a>
 		<a href="?r=data/Planificacion/index.php"><li> Planificación </li></a>
 		<a href="?r=data/Ayuda/index.php"><li> Ayuda </li></a>

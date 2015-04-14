@@ -3,11 +3,11 @@
 	include "../../lib/verificar.php";
 
 		// Si el nivel no es de Vicerrectorado no se permitira acceder al contenido
-	if($_SESSION["n"]!=1)
+	/*if($_SESSION["n"]!=1)
 	{
 		echo "<meta http-equiv='Refresh' content='0; url=/SIGPA/' />";
 		exit();
-	}
+	}*/
 
 		// Obtener las carreras existentes y el departamento al que petenecen
 	$sql="

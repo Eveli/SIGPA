@@ -5,7 +5,7 @@
 	$p=$_POST["p"];
 
 	$sql="
-		select c.ci, string_agg(concat_ws('-', concat_ws(':', c.ht+c.hp, uc.cc), concat_ws('/', c.cuc, c.sup)), ',') uc 
+		select c.ci, string_agg(concat_ws('-', concat_ws(':', c.ht+c.hp, uc.cc), concat_ws('/', c.cuc, c.sup)), ',' order by c.sup, uc.d) uc 
 		from carga c 
 			join uc on uc.cuc=c.cuc and uc.tr=c.tr and uc.cm=c.cm
 		where c.p='$p'
@@ -18,6 +18,7 @@
 	{
 		unset($hc);
 		unset($cc);
+		$ciAnt="";
 
 		$d="";
 		
@@ -41,7 +42,15 @@
 
 				$nsup=pg_fetch_object($ejec2);
 
-				$d.="Suple Prof. $nsup->a1 $nsup->n1 en $duc->d<br>";
+				if($sup[1]!=$ciAnt)
+				{
+					$d.="<br>";
+					$d.="Suple Prof. $nsup->a1 $nsup->n1 en $duc->d";
+					$ciAnt=$sup[1];
+				}
+
+				else
+					$d.=", $duc->d";
 			}
 
 			else
@@ -54,6 +63,7 @@
 						join profesor p on p.ci=c.ci
 						join uc on uc.cuc=c.cuc
 					where c.cuc='$uc[$i]' and c.sup='$prof->ci'
+					order by c.ci, uc.d
 				";
 				$ejec2=pg_query($sigpa, $sql);
 
@@ -61,7 +71,17 @@
 				{
 					$sup=pg_fetch_object($ejec2);
 
-					$d.="Suplente de Prof. $sup->a1 $sup->n1 en $sup->uc<br>";
+					//$d.="Suplente de Prof. $sup->a1 $sup->n1 en $sup->uc<br>";
+
+					if($sup->ci!=$ciAnt)
+					{
+						$d.="<br>";
+						$d.="Suplente de Prof. $sup->a1 $sup->n1 en $sup->uc";
+						$ciAnt=$sup->ci;
+					}
+
+					else
+						$d.=", $sup->uc";
 				}
 			}
 
@@ -69,6 +89,8 @@
 
 			$cc[$c]+=$h;
 		}
+
+		$d.="<br>";
 
 		if(count($cc)>1)
 		{
