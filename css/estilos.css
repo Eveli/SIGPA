@@ -394,3 +394,12 @@ legend
 	background: #0000cb;
 	border-radius: 10px;
 }
+
+/* carga */
+.principal
+{
+	width: 750px;
+	height: 150px;
+	margin: 0 auto;
+	text-align: justify;
+}

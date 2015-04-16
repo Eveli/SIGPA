@@ -14,6 +14,12 @@
 
 		<a href="?r=data/Carreras/index.php"><li> PNF/Carreras </li></a>
 		<a href="?r=data/Planificacion/planilla.php"><li> Planificación </li></a>
+		<li> Carga 
+			<ul>
+				<a href="?r=data/Carga/registrar_carga.php"><li>Registrar Carga</li></a>
+				<a href="?r=data/Carga/consulta_carga.php"><li>Consultar Carga</li></a>
+			</ul>
+		</li>
 		<li> Configuración 
 			<ul>
 				<a href="?r=data/Areas/index.php"><li> Areas </li></a>
