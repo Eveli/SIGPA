@@ -3,35 +3,20 @@
 --
 
 SET statement_timeout = 0;
-SET client_encoding = 'SQL_ASCII';
+SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: SIGPA; Type: DATABASE; Schema: -; Owner: -
---
-
-CREATE DATABASE "SIGPA" WITH TEMPLATE = template0 ENCODING = 'SQL_ASCII' LC_COLLATE = 'C' LC_CTYPE = 'C';
-
-
-\connect "SIGPA"
-
-SET statement_timeout = 0;
-SET client_encoding = 'SQL_ASCII';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -39,10 +24,32 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+SET default_tablespace = '';
+
 SET default_with_oids = false;
 
 --
--- Name: area; Type: TABLE; Schema: public; Owner: -
+-- Name: actualizacion_prof; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE actualizacion_prof (
+    cod_act character varying NOT NULL,
+    direccion character varying(50) NOT NULL,
+    fecha_ingreso date NOT NULL,
+    "aÃ±o_ascenso" character varying(4) NOT NULL,
+    otro_pnf character varying(50) NOT NULL,
+    conocimiento_pnf text NOT NULL,
+    tutor_pnf text NOT NULL,
+    observacion text NOT NULL,
+    fecha_actualizacion timestamp(6) without time zone NOT NULL,
+    ci character varying(8)
+);
+
+
+ALTER TABLE public.actualizacion_prof OWNER TO postgres;
+
+--
+-- Name: area; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE area (
@@ -51,8 +58,10 @@ CREATE TABLE area (
 );
 
 
+ALTER TABLE public.area OWNER TO postgres;
+
 --
--- Name: carga; Type: TABLE; Schema: public; Owner: -
+-- Name: carga; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE carga (
@@ -68,8 +77,10 @@ CREATE TABLE carga (
 );
 
 
+ALTER TABLE public.carga OWNER TO postgres;
+
 --
--- Name: carrera; Type: TABLE; Schema: public; Owner: -
+-- Name: carrera; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE carrera (
@@ -79,8 +90,22 @@ CREATE TABLE carrera (
 );
 
 
+ALTER TABLE public.carrera OWNER TO postgres;
+
 --
--- Name: categoria; Type: TABLE; Schema: public; Owner: -
+-- Name: carrera_actualizacion_prof; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE carrera_actualizacion_prof (
+    cc character varying NOT NULL,
+    cod_act character varying NOT NULL
+);
+
+
+ALTER TABLE public.carrera_actualizacion_prof OWNER TO postgres;
+
+--
+-- Name: categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE categoria (
@@ -90,8 +115,25 @@ CREATE TABLE categoria (
 );
 
 
+ALTER TABLE public.categoria OWNER TO postgres;
+
 --
--- Name: condicion; Type: TABLE; Schema: public; Owner: -
+-- Name: comunidad_aprendizaje; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE comunidad_aprendizaje (
+    cod_comu character varying NOT NULL,
+    prouea boolean,
+    asignacion_prouea character varying(40),
+    nombre_comu character varying(50),
+    cod_act character varying NOT NULL
+);
+
+
+ALTER TABLE public.comunidad_aprendizaje OWNER TO postgres;
+
+--
+-- Name: condicion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE condicion (
@@ -100,8 +142,10 @@ CREATE TABLE condicion (
 );
 
 
+ALTER TABLE public.condicion OWNER TO postgres;
+
 --
--- Name: coordinacion; Type: TABLE; Schema: public; Owner: -
+-- Name: coordinacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE coordinacion (
@@ -111,8 +155,25 @@ CREATE TABLE coordinacion (
 );
 
 
+ALTER TABLE public.coordinacion OWNER TO postgres;
+
 --
--- Name: dedicacion; Type: TABLE; Schema: public; Owner: -
+-- Name: cubiculo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cubiculo (
+    cod_cub character varying NOT NULL,
+    tenencia_cub boolean,
+    numero_cub integer,
+    uso_cub character varying(40),
+    cod_act character varying NOT NULL
+);
+
+
+ALTER TABLE public.cubiculo OWNER TO postgres;
+
+--
+-- Name: dedicacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE dedicacion (
@@ -123,8 +184,10 @@ CREATE TABLE dedicacion (
 );
 
 
+ALTER TABLE public.dedicacion OWNER TO postgres;
+
 --
--- Name: eje; Type: TABLE; Schema: public; Owner: -
+-- Name: eje; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE eje (
@@ -133,8 +196,25 @@ CREATE TABLE eje (
 );
 
 
+ALTER TABLE public.eje OWNER TO postgres;
+
 --
--- Name: estudios; Type: TABLE; Schema: public; Owner: -
+-- Name: estudio_superior; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE estudio_superior (
+    cod_esup character varying NOT NULL,
+    tipo_esup character varying(12),
+    nombre_esup character varying(40),
+    cod_uni character varying,
+    cod_act character varying
+);
+
+
+ALTER TABLE public.estudio_superior OWNER TO postgres;
+
+--
+-- Name: estudios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE estudios (
@@ -143,8 +223,10 @@ CREATE TABLE estudios (
 );
 
 
+ALTER TABLE public.estudios OWNER TO postgres;
+
 --
--- Name: historial; Type: TABLE; Schema: public; Owner: -
+-- Name: historial; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE historial (
@@ -154,8 +236,25 @@ CREATE TABLE historial (
 );
 
 
+ALTER TABLE public.historial OWNER TO postgres;
+
 --
--- Name: malla; Type: TABLE; Schema: public; Owner: -
+-- Name: investigacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE investigacion (
+    cod_inv character varying NOT NULL,
+    grupo_inv boolean,
+    nombre_inv character varying(40),
+    linea_inv text,
+    cod_act character varying
+);
+
+
+ALTER TABLE public.investigacion OWNER TO postgres;
+
+--
+-- Name: malla; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE malla (
@@ -166,8 +265,10 @@ CREATE TABLE malla (
 );
 
 
+ALTER TABLE public.malla OWNER TO postgres;
+
 --
--- Name: observacion; Type: TABLE; Schema: public; Owner: -
+-- Name: observacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE observacion (
@@ -177,8 +278,24 @@ CREATE TABLE observacion (
 );
 
 
+ALTER TABLE public.observacion OWNER TO postgres;
+
 --
--- Name: perfil; Type: TABLE; Schema: public; Owner: -
+-- Name: peii; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE peii (
+    cod_peii character varying NOT NULL,
+    peii boolean,
+    "año_peii" date,
+    cod_act character varying
+);
+
+
+ALTER TABLE public.peii OWNER TO postgres;
+
+--
+-- Name: perfil; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE perfil (
@@ -187,8 +304,10 @@ CREATE TABLE perfil (
 );
 
 
+ALTER TABLE public.perfil OWNER TO postgres;
+
 --
--- Name: periodo; Type: TABLE; Schema: public; Owner: -
+-- Name: periodo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE periodo (
@@ -198,8 +317,10 @@ CREATE TABLE periodo (
 );
 
 
+ALTER TABLE public.periodo OWNER TO postgres;
+
 --
--- Name: pertenece; Type: TABLE; Schema: public; Owner: -
+-- Name: pertenece; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE pertenece (
@@ -208,8 +329,10 @@ CREATE TABLE pertenece (
 );
 
 
+ALTER TABLE public.pertenece OWNER TO postgres;
+
 --
--- Name: profesion; Type: TABLE; Schema: public; Owner: -
+-- Name: profesion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE profesion (
@@ -218,8 +341,10 @@ CREATE TABLE profesion (
 );
 
 
+ALTER TABLE public.profesion OWNER TO postgres;
+
 --
--- Name: profesor; Type: TABLE; Schema: public; Owner: -
+-- Name: profesor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE profesor (
@@ -240,8 +365,10 @@ CREATE TABLE profesor (
 );
 
 
+ALTER TABLE public.profesor OWNER TO postgres;
+
 --
--- Name: seccion; Type: TABLE; Schema: public; Owner: -
+-- Name: seccion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE seccion (
@@ -249,8 +376,10 @@ CREATE TABLE seccion (
 );
 
 
+ALTER TABLE public.seccion OWNER TO postgres;
+
 --
--- Name: sede; Type: TABLE; Schema: public; Owner: -
+-- Name: sede; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE sede (
@@ -262,8 +391,10 @@ CREATE TABLE sede (
 );
 
 
+ALTER TABLE public.sede OWNER TO postgres;
+
 --
--- Name: uc; Type: TABLE; Schema: public; Owner: -
+-- Name: uc; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE uc (
@@ -280,8 +411,10 @@ CREATE TABLE uc (
 );
 
 
+ALTER TABLE public.uc OWNER TO postgres;
+
 --
--- Name: uc_cc_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: uc_cc_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE uc_cc_seq
@@ -292,15 +425,17 @@ CREATE SEQUENCE uc_cc_seq
     CACHE 1;
 
 
+ALTER TABLE public.uc_cc_seq OWNER TO postgres;
+
 --
--- Name: uc_cc_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: uc_cc_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE uc_cc_seq OWNED BY uc.cc;
 
 
 --
--- Name: uc_e_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: uc_e_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE uc_e_seq
@@ -311,15 +446,29 @@ CREATE SEQUENCE uc_e_seq
     CACHE 1;
 
 
+ALTER TABLE public.uc_e_seq OWNER TO postgres;
+
 --
--- Name: uc_e_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: uc_e_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE uc_e_seq OWNED BY uc.ce;
 
 
 --
--- Name: usuario; Type: TABLE; Schema: public; Owner: -
+-- Name: universidad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE universidad (
+    cod_uni character varying NOT NULL,
+    nombre_uni character varying(100)
+);
+
+
+ALTER TABLE public.universidad OWNER TO postgres;
+
+--
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE usuario (
@@ -330,8 +479,31 @@ CREATE TABLE usuario (
 );
 
 
+ALTER TABLE public.usuario OWNER TO postgres;
+
 --
--- Data for Name: area; Type: TABLE DATA; Schema: public; Owner: -
+-- Name: vivienda; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE vivienda (
+    cod_viv character varying NOT NULL,
+    tenencia_viv boolean,
+    cod_act character varying
+);
+
+
+ALTER TABLE public.vivienda OWNER TO postgres;
+
+--
+-- Data for Name: actualizacion_prof; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY actualizacion_prof (cod_act, direccion, fecha_ingreso, "aÃ±o_ascenso", otro_pnf, conocimiento_pnf, tutor_pnf, observacion, fecha_actualizacion, ci) FROM stdin;
+\.
+
+
+--
+-- Data for Name: area; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY area (ca, d) FROM stdin;
@@ -342,7 +514,7 @@ COPY area (ca, d) FROM stdin;
 
 
 --
--- Data for Name: carga; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: carga; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY carga (cuc, ci, p, s, ht, hp, tr, cm, sup) FROM stdin;
@@ -428,7 +600,7 @@ efsi	15296169	2015-A	A<br>	2	2	2	1	\N
 
 
 --
--- Data for Name: carrera; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: carrera; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY carrera (cc, d, ca) FROM stdin;
@@ -447,7 +619,15 @@ COPY carrera (cc, d, ca) FROM stdin;
 
 
 --
--- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: carrera_actualizacion_prof; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY carrera_actualizacion_prof (cc, cod_act) FROM stdin;
+\.
+
+
+--
+-- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY categoria (cat, abrv, d) FROM stdin;
@@ -462,7 +642,15 @@ COPY categoria (cat, abrv, d) FROM stdin;
 
 
 --
--- Data for Name: condicion; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: comunidad_aprendizaje; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY comunidad_aprendizaje (cod_comu, prouea, asignacion_prouea, nombre_comu, cod_act) FROM stdin;
+\.
+
+
+--
+-- Data for Name: condicion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY condicion (c, d) FROM stdin;
@@ -475,7 +663,7 @@ COPY condicion (c, d) FROM stdin;
 
 
 --
--- Data for Name: coordinacion; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: coordinacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY coordinacion (ci, cc, s) FROM stdin;
@@ -490,7 +678,15 @@ COPY coordinacion (ci, cc, s) FROM stdin;
 
 
 --
--- Data for Name: dedicacion; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: cubiculo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY cubiculo (cod_cub, tenencia_cub, numero_cub, uso_cub, cod_act) FROM stdin;
+\.
+
+
+--
+-- Data for Name: dedicacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY dedicacion (ded, abrv, d, h) FROM stdin;
@@ -503,7 +699,7 @@ COPY dedicacion (ded, abrv, d, h) FROM stdin;
 
 
 --
--- Data for Name: eje; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: eje; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY eje (ce, d) FROM stdin;
@@ -516,7 +712,15 @@ COPY eje (ce, d) FROM stdin;
 
 
 --
--- Data for Name: estudios; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: estudio_superior; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY estudio_superior (cod_esup, tipo_esup, nombre_esup, cod_uni, cod_act) FROM stdin;
+\.
+
+
+--
+-- Data for Name: estudios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY estudios (cp, ci) FROM stdin;
@@ -796,7 +1000,7 @@ COPY estudios (cp, ci) FROM stdin;
 
 
 --
--- Data for Name: historial; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: historial; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY historial (ci, d, f) FROM stdin;
@@ -1304,11 +1508,22 @@ COPY historial (ci, d, f) FROM stdin;
 08041510	Se eliminó el respaldo 2015-04-13_12-45-07.sql	2015-04-13 12:54:11.792976
 08041510	Se eliminó el respaldo 2015-04-13_12-49-41.sql	2015-04-13 12:54:13.861407
 08041510	Se eliminó el respaldo nombre.sql	2015-04-13 12:54:15.895185
+12722185	El usuario 12722185 ha iniciado sesión	2015-04-15 18:29:28.992244
+4321	El usuario 4321 ha iniciado sesión	2015-04-15 18:34:23.760501
+1234	El usuario 1234 ha iniciado sesión	2015-04-15 18:36:38.614698
 \.
 
 
 --
--- Data for Name: malla; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: investigacion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY investigacion (cod_inv, grupo_inv, nombre_inv, linea_inv, cod_act) FROM stdin;
+\.
+
+
+--
+-- Data for Name: malla; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY malla (cm, e, f, cc) FROM stdin;
@@ -1328,7 +1543,7 @@ COPY malla (cm, e, f, cc) FROM stdin;
 
 
 --
--- Data for Name: observacion; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: observacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY observacion (p, ci, d) FROM stdin;
@@ -1372,7 +1587,15 @@ COPY observacion (p, ci, d) FROM stdin;
 
 
 --
--- Data for Name: perfil; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: peii; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY peii (cod_peii, peii, "año_peii", cod_act) FROM stdin;
+\.
+
+
+--
+-- Data for Name: perfil; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY perfil (cuc, ci) FROM stdin;
@@ -1461,7 +1684,7 @@ PIFC1	11954144
 
 
 --
--- Data for Name: periodo; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: periodo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY periodo (fi, ff, t) FROM stdin;
@@ -1471,7 +1694,7 @@ COPY periodo (fi, ff, t) FROM stdin;
 
 
 --
--- Data for Name: pertenece; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: pertenece; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY pertenece (ci, cc) FROM stdin;
@@ -1850,7 +2073,7 @@ COPY pertenece (ci, cc) FROM stdin;
 
 
 --
--- Data for Name: profesion; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: profesion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY profesion (cp, d) FROM stdin;
@@ -1912,7 +2135,7 @@ COPY profesion (cp, d) FROM stdin;
 
 
 --
--- Data for Name: profesor; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: profesor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY profesor (ci, n1, n2, a1, a2, c, cat, ded, s, ce, tf, tm, h, re) FROM stdin;
@@ -2192,7 +2415,7 @@ COPY profesor (ci, n1, n2, a1, a2, c, cat, ded, s, ce, tf, tm, h, re) FROM stdin
 
 
 --
--- Data for Name: seccion; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: seccion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY seccion (id) FROM stdin;
@@ -2205,7 +2428,7 @@ E
 
 
 --
--- Data for Name: sede; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: sede; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY sede (s, d, dir, t, f) FROM stdin;
@@ -2221,7 +2444,7 @@ COPY sede (s, d, dir, t, f) FROM stdin;
 
 
 --
--- Data for Name: uc; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: uc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY uc (cuc, d, t, tr, ht, hp, ce, cc, cm, lab) FROM stdin;
@@ -3109,21 +3332,29 @@ efsi	ELECTIVA FUNDAMENTOS DE SISTEMAS DE INFORMACIÓN	2	2	2	2	1	03	1	1
 
 
 --
--- Name: uc_cc_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: uc_cc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('uc_cc_seq', 1, false);
 
 
 --
--- Name: uc_e_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: uc_e_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('uc_e_seq', 1, false);
 
 
 --
--- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: universidad; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY universidad (cod_uni, nombre_uni) FROM stdin;
+\.
+
+
+--
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY usuario (ci, pw, r, n) FROM stdin;
@@ -3141,7 +3372,23 @@ COPY usuario (ci, pw, r, n) FROM stdin;
 
 
 --
--- Name: carga_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Data for Name: vivienda; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY vivienda (cod_viv, tenencia_viv, cod_act) FROM stdin;
+\.
+
+
+--
+-- Name: actualizacion_prof_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY actualizacion_prof
+    ADD CONSTRAINT actualizacion_prof_pkey PRIMARY KEY (cod_act);
+
+
+--
+-- Name: carga_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY carga
@@ -3149,7 +3396,7 @@ ALTER TABLE ONLY carga
 
 
 --
--- Name: carrera_d_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: carrera_d_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY carrera
@@ -3157,7 +3404,7 @@ ALTER TABLE ONLY carrera
 
 
 --
--- Name: carrera_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: carrera_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY carrera
@@ -3165,7 +3412,7 @@ ALTER TABLE ONLY carrera
 
 
 --
--- Name: categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY categoria
@@ -3173,7 +3420,15 @@ ALTER TABLE ONLY categoria
 
 
 --
--- Name: condicion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: comunidad_aprendizaje_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY comunidad_aprendizaje
+    ADD CONSTRAINT comunidad_aprendizaje_pkey PRIMARY KEY (cod_comu);
+
+
+--
+-- Name: condicion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY condicion
@@ -3181,7 +3436,7 @@ ALTER TABLE ONLY condicion
 
 
 --
--- Name: coordinacion_ci_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: coordinacion_ci_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY coordinacion
@@ -3189,7 +3444,7 @@ ALTER TABLE ONLY coordinacion
 
 
 --
--- Name: coordinacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: coordinacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY coordinacion
@@ -3197,7 +3452,15 @@ ALTER TABLE ONLY coordinacion
 
 
 --
--- Name: dedicacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: cubiculo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cubiculo
+    ADD CONSTRAINT cubiculo_pkey PRIMARY KEY (cod_cub);
+
+
+--
+-- Name: dedicacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY dedicacion
@@ -3205,7 +3468,7 @@ ALTER TABLE ONLY dedicacion
 
 
 --
--- Name: departamento_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: departamento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY area
@@ -3213,7 +3476,7 @@ ALTER TABLE ONLY area
 
 
 --
--- Name: dicta_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: dicta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY perfil
@@ -3221,7 +3484,7 @@ ALTER TABLE ONLY perfil
 
 
 --
--- Name: eje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: eje_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY eje
@@ -3229,7 +3492,15 @@ ALTER TABLE ONLY eje
 
 
 --
--- Name: historial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: estudio_superior_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY estudio_superior
+    ADD CONSTRAINT estudio_superior_pkey PRIMARY KEY (cod_esup);
+
+
+--
+-- Name: historial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY historial
@@ -3237,7 +3508,15 @@ ALTER TABLE ONLY historial
 
 
 --
--- Name: malla_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: investigacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY investigacion
+    ADD CONSTRAINT investigacion_pkey PRIMARY KEY (cod_inv);
+
+
+--
+-- Name: malla_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY malla
@@ -3245,7 +3524,7 @@ ALTER TABLE ONLY malla
 
 
 --
--- Name: observacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: observacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY observacion
@@ -3253,7 +3532,7 @@ ALTER TABLE ONLY observacion
 
 
 --
--- Name: p_obtenida_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: p_obtenida_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY estudios
@@ -3261,7 +3540,15 @@ ALTER TABLE ONLY estudios
 
 
 --
--- Name: periodo_ff_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: peii_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY peii
+    ADD CONSTRAINT peii_pkey PRIMARY KEY (cod_peii);
+
+
+--
+-- Name: periodo_ff_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY periodo
@@ -3269,7 +3556,7 @@ ALTER TABLE ONLY periodo
 
 
 --
--- Name: periodo_fi_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: periodo_fi_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY periodo
@@ -3277,7 +3564,7 @@ ALTER TABLE ONLY periodo
 
 
 --
--- Name: pertenece_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: pertenece_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY pertenece
@@ -3285,7 +3572,7 @@ ALTER TABLE ONLY pertenece
 
 
 --
--- Name: profesion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: profesion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY profesion
@@ -3293,7 +3580,7 @@ ALTER TABLE ONLY profesion
 
 
 --
--- Name: profesor_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: profesor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY profesor
@@ -3301,7 +3588,7 @@ ALTER TABLE ONLY profesor
 
 
 --
--- Name: seccion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: seccion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY seccion
@@ -3309,7 +3596,7 @@ ALTER TABLE ONLY seccion
 
 
 --
--- Name: sede_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: sede_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY sede
@@ -3317,7 +3604,7 @@ ALTER TABLE ONLY sede
 
 
 --
--- Name: uc_cuc_tr_cm_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: uc_cuc_tr_cm_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY uc
@@ -3325,7 +3612,7 @@ ALTER TABLE ONLY uc
 
 
 --
--- Name: uc_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: uc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY uc
@@ -3333,7 +3620,15 @@ ALTER TABLE ONLY uc
 
 
 --
--- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: universidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY universidad
+    ADD CONSTRAINT universidad_pkey PRIMARY KEY (cod_uni);
+
+
+--
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY usuario
@@ -3341,7 +3636,23 @@ ALTER TABLE ONLY usuario
 
 
 --
--- Name: carga_cuc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: vivienda_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY vivienda
+    ADD CONSTRAINT vivienda_pkey PRIMARY KEY (cod_viv);
+
+
+--
+-- Name: actualizacion_prof_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actualizacion_prof
+    ADD CONSTRAINT actualizacion_prof_ci_fkey FOREIGN KEY (ci) REFERENCES profesor(ci) ON UPDATE CASCADE;
+
+
+--
+-- Name: carga_cuc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY carga
@@ -3349,7 +3660,23 @@ ALTER TABLE ONLY carga
 
 
 --
--- Name: carrera_cd_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: carrera_actualizacion_prof_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY carrera_actualizacion_prof
+    ADD CONSTRAINT carrera_actualizacion_prof_cc_fkey FOREIGN KEY (cc) REFERENCES carrera(cc) ON UPDATE CASCADE;
+
+
+--
+-- Name: carrera_actualizacion_prof_cod_act_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY carrera_actualizacion_prof
+    ADD CONSTRAINT carrera_actualizacion_prof_cod_act_fkey FOREIGN KEY (cod_act) REFERENCES actualizacion_prof(cod_act) ON UPDATE CASCADE;
+
+
+--
+-- Name: carrera_cd_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY carrera
@@ -3357,7 +3684,15 @@ ALTER TABLE ONLY carrera
 
 
 --
--- Name: coordinacion_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: comunidad_aprendizaje_cod_act_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY comunidad_aprendizaje
+    ADD CONSTRAINT comunidad_aprendizaje_cod_act_fkey FOREIGN KEY (cod_act) REFERENCES actualizacion_prof(cod_act) ON UPDATE CASCADE;
+
+
+--
+-- Name: coordinacion_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY coordinacion
@@ -3365,7 +3700,7 @@ ALTER TABLE ONLY coordinacion
 
 
 --
--- Name: coordinacion_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: coordinacion_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY coordinacion
@@ -3373,7 +3708,7 @@ ALTER TABLE ONLY coordinacion
 
 
 --
--- Name: coordinacion_s_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: coordinacion_s_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY coordinacion
@@ -3381,7 +3716,15 @@ ALTER TABLE ONLY coordinacion
 
 
 --
--- Name: dicta_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: cubiculo_cod_act_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cubiculo
+    ADD CONSTRAINT cubiculo_cod_act_fkey FOREIGN KEY (cod_act) REFERENCES actualizacion_prof(cod_act) ON UPDATE CASCADE;
+
+
+--
+-- Name: dicta_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY perfil
@@ -3389,7 +3732,7 @@ ALTER TABLE ONLY perfil
 
 
 --
--- Name: historial_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: historial_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY historial
@@ -3397,7 +3740,15 @@ ALTER TABLE ONLY historial
 
 
 --
--- Name: malla_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: investigacion_cod_act_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY investigacion
+    ADD CONSTRAINT investigacion_cod_act_fkey FOREIGN KEY (cod_act) REFERENCES actualizacion_prof(cod_act) ON UPDATE CASCADE;
+
+
+--
+-- Name: malla_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY malla
@@ -3405,7 +3756,7 @@ ALTER TABLE ONLY malla
 
 
 --
--- Name: p_obtenida_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: p_obtenida_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY estudios
@@ -3413,7 +3764,7 @@ ALTER TABLE ONLY estudios
 
 
 --
--- Name: p_obtenida_cp_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: p_obtenida_cp_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY estudios
@@ -3421,7 +3772,15 @@ ALTER TABLE ONLY estudios
 
 
 --
--- Name: pertenece_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: peii_cod_act_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY peii
+    ADD CONSTRAINT peii_cod_act_fkey FOREIGN KEY (cod_act) REFERENCES actualizacion_prof(cod_act) ON UPDATE CASCADE;
+
+
+--
+-- Name: pertenece_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY pertenece
@@ -3429,7 +3788,7 @@ ALTER TABLE ONLY pertenece
 
 
 --
--- Name: pertenece_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: pertenece_ci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY pertenece
@@ -3437,7 +3796,7 @@ ALTER TABLE ONLY pertenece
 
 
 --
--- Name: profesor_c_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: profesor_c_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY profesor
@@ -3445,7 +3804,7 @@ ALTER TABLE ONLY profesor
 
 
 --
--- Name: profesor_cat_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: profesor_cat_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY profesor
@@ -3453,7 +3812,7 @@ ALTER TABLE ONLY profesor
 
 
 --
--- Name: profesor_ded_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: profesor_ded_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY profesor
@@ -3461,7 +3820,7 @@ ALTER TABLE ONLY profesor
 
 
 --
--- Name: profesor_s_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: profesor_s_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY profesor
@@ -3469,7 +3828,7 @@ ALTER TABLE ONLY profesor
 
 
 --
--- Name: uc_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: uc_cc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY uc
@@ -3477,11 +3836,29 @@ ALTER TABLE ONLY uc
 
 
 --
--- Name: uc_ce_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: uc_ce_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY uc
     ADD CONSTRAINT uc_ce_fkey FOREIGN KEY (ce) REFERENCES eje(ce) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: vivienda_cod_act_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY vivienda
+    ADD CONSTRAINT vivienda_cod_act_fkey FOREIGN KEY (cod_act) REFERENCES actualizacion_prof(cod_act) ON UPDATE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
