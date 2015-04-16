@@ -116,7 +116,16 @@
 	</tr>
 </table><br/>
 
+<?php
+	if($_SESSION["n"]=="1")
+	{
+?>
+
 <a <?= "href=\"?r=data/Carreras/index.php\"" ?>><input type="button" value="Regresar" class="boton" /></a>
+
+<?php
+	}
+?>
 
 <script>
 	function verificar_car()

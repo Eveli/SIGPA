@@ -29,9 +29,13 @@
 
 			// Coordinador
 		case '2':
+			$sql="select cc from coordinacion where ci='$_SESSION[ci]'";
+			$ejec=pg_query($sigpa, $sql);
+
+			$c=pg_fetch_object($ejec);
 ?>
 
-		<a href="?r=data/Carreras/m.php"><li> Malla </li></a>
+		<a href="<?= "?r=data/Carreras/consultar.php&cc=$c->cc" ?>"><li> Malla </li></a>
 		<a href="?r=data/Profesor/index.php"><li> Profesores </li></a>
 		<a href="?r=data/Planificacion/index.php"><li> Planificación </li></a>
 		<a href="?r=data/Ayuda/index.php"><li> Ayuda </li></a>
