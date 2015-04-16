@@ -42,7 +42,8 @@ CREATE TABLE actualizacion_prof (
     tutor_pnf text NOT NULL,
     observacion text NOT NULL,
     fecha_actualizacion timestamp(6) without time zone NOT NULL,
-    ci character varying(8)
+    ci character varying(8),
+    sexo character varying(9) NOT NULL
 );
 
 
@@ -498,7 +499,7 @@ ALTER TABLE public.vivienda OWNER TO postgres;
 -- Data for Name: actualizacion_prof; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY actualizacion_prof (cod_act, direccion, fecha_ingreso, "aÃ±o_ascenso", otro_pnf, conocimiento_pnf, tutor_pnf, observacion, fecha_actualizacion, ci) FROM stdin;
+COPY actualizacion_prof (cod_act, direccion, fecha_ingreso, "aÃ±o_ascenso", otro_pnf, conocimiento_pnf, tutor_pnf, observacion, fecha_actualizacion, ci, sexo) FROM stdin;
 \.
 
 
@@ -1511,6 +1512,11 @@ COPY historial (ci, d, f) FROM stdin;
 12722185	El usuario 12722185 ha iniciado sesión	2015-04-15 18:29:28.992244
 4321	El usuario 4321 ha iniciado sesión	2015-04-15 18:34:23.760501
 1234	El usuario 1234 ha iniciado sesión	2015-04-15 18:36:38.614698
+4321	El usuario 4321 ha iniciado sesión	2015-04-15 21:42:27.32473
+1234	El usuario 1234 ha iniciado sesión	2015-04-15 21:45:07.141826
+4321	El usuario 4321 ha iniciado sesión	2015-04-15 21:51:48.020451
+4321	El usuario 4321 ha iniciado sesión	2015-04-15 21:56:14.687822
+1234	El usuario 1234 ha iniciado sesión	2015-04-15 21:56:25.783908
 \.
 
 

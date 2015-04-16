@@ -24,7 +24,7 @@ include "../../lib/menu.php"; // Menú de navegación del sistema
 	}
 	else
 	{
-	     echo "<script type='text/javascript'> alert('Cedula no Registrada en el Sistema'); window.location='consulta_carga.php';</script>";
+	     echo "<script type='text/javascript'> alert('Cedula no Registrada en el Sistema'); window.location='?r=data/Carga/consulta_carga.php';</script>";
 
 	}
 ?>
