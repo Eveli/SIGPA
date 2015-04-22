@@ -8,20 +8,6 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -36,7 +22,7 @@ CREATE TABLE actualizacion_prof (
     cod_act character varying NOT NULL,
     direccion character varying(50) NOT NULL,
     fecha_ingreso date NOT NULL,
-    "aÃ±o_ascenso" character varying(4) NOT NULL,
+    "año_ascenso" character varying(4) NOT NULL,
     otro_pnf character varying(50) NOT NULL,
     conocimiento_pnf text NOT NULL,
     tutor_pnf text NOT NULL,
@@ -208,7 +194,9 @@ CREATE TABLE estudio_superior (
     tipo_esup character varying(12),
     nombre_esup character varying(40),
     cod_uni character varying,
-    cod_act character varying
+    cod_act character varying,
+    esup_realiza boolean,
+    esup_desea boolean
 );
 
 
@@ -499,7 +487,7 @@ ALTER TABLE public.vivienda OWNER TO postgres;
 -- Data for Name: actualizacion_prof; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY actualizacion_prof (cod_act, direccion, fecha_ingreso, "aÃ±o_ascenso", otro_pnf, conocimiento_pnf, tutor_pnf, observacion, fecha_actualizacion, ci, sexo) FROM stdin;
+COPY actualizacion_prof (cod_act, direccion, fecha_ingreso, "año_ascenso", otro_pnf, conocimiento_pnf, tutor_pnf, observacion, fecha_actualizacion, ci, sexo) FROM stdin;
 \.
 
 
@@ -716,7 +704,7 @@ COPY eje (ce, d) FROM stdin;
 -- Data for Name: estudio_superior; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY estudio_superior (cod_esup, tipo_esup, nombre_esup, cod_uni, cod_act) FROM stdin;
+COPY estudio_superior (cod_esup, tipo_esup, nombre_esup, cod_uni, cod_act, esup_realiza, esup_desea) FROM stdin;
 \.
 
 
@@ -1517,6 +1505,8 @@ COPY historial (ci, d, f) FROM stdin;
 4321	El usuario 4321 ha iniciado sesión	2015-04-15 21:51:48.020451
 4321	El usuario 4321 ha iniciado sesión	2015-04-15 21:56:14.687822
 1234	El usuario 1234 ha iniciado sesión	2015-04-15 21:56:25.783908
+4321	El usuario 4321 ha iniciado sesión	2015-04-22 16:48:30.879468
+1234	El usuario 1234 ha iniciado sesión	2015-04-22 17:00:28.604112
 \.
 
 
