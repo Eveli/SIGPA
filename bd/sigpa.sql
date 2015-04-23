@@ -4,15 +4,41 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
+SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET escape_string_warning = off;
 
 SET search_path = public, pg_catalog;
+
+--
+-- Name: sexo; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE sexo AS ENUM (
+    'masculino',
+    'femenino'
+);
+
+
+ALTER TYPE public.sexo OWNER TO postgres;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: actualizacion_estudio; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE actualizacion_estudio (
+    cod_act character varying,
+    cod_esup character varying,
+    cod_uni character varying
+);
+
+
+ALTER TABLE public.actualizacion_estudio OWNER TO postgres;
 
 --
 -- Name: actualizacion_prof; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -29,7 +55,7 @@ CREATE TABLE actualizacion_prof (
     observacion text NOT NULL,
     fecha_actualizacion timestamp(6) without time zone NOT NULL,
     ci character varying(8),
-    sexo character varying(9) NOT NULL
+    sexo sexo NOT NULL
 );
 
 
@@ -193,8 +219,6 @@ CREATE TABLE estudio_superior (
     cod_esup character varying NOT NULL,
     tipo_esup character varying(12),
     nombre_esup character varying(40),
-    cod_uni character varying,
-    cod_act character varying,
     esup_realiza boolean,
     esup_desea boolean
 );
@@ -236,7 +260,8 @@ CREATE TABLE investigacion (
     grupo_inv boolean,
     nombre_inv character varying(40),
     linea_inv text,
-    cod_act character varying
+    cod_act character varying,
+    linea_indagar text
 );
 
 
@@ -409,8 +434,8 @@ ALTER TABLE public.uc OWNER TO postgres;
 CREATE SEQUENCE uc_cc_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -424,14 +449,21 @@ ALTER SEQUENCE uc_cc_seq OWNED BY uc.cc;
 
 
 --
+-- Name: uc_cc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('uc_cc_seq', 1, false);
+
+
+--
 -- Name: uc_e_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE uc_e_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -442,6 +474,13 @@ ALTER TABLE public.uc_e_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE uc_e_seq OWNED BY uc.ce;
+
+
+--
+-- Name: uc_e_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('uc_e_seq', 1, false);
 
 
 --
@@ -484,10 +523,21 @@ CREATE TABLE vivienda (
 ALTER TABLE public.vivienda OWNER TO postgres;
 
 --
+-- Data for Name: actualizacion_estudio; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY actualizacion_estudio (cod_act, cod_esup, cod_uni) FROM stdin;
+1	01	01
+\.
+
+
+--
 -- Data for Name: actualizacion_prof; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY actualizacion_prof (cod_act, direccion, fecha_ingreso, "año_ascenso", otro_pnf, conocimiento_pnf, tutor_pnf, observacion, fecha_actualizacion, ci, sexo) FROM stdin;
+1	Merida	2002-01-10	2014	no	Programacion	PNF en Informatica	En Prueba	2015-03-22 00:00:00	09499979	masculino
+011	direccion	2003-01-10	2005	prueba	si prueba	si prueba	observacion	2015-04-19 00:00:00	09499979	masculino
 \.
 
 
@@ -612,6 +662,7 @@ COPY carrera (cc, d, ca) FROM stdin;
 --
 
 COPY carrera_actualizacion_prof (cc, cod_act) FROM stdin;
+03	1
 \.
 
 
@@ -635,6 +686,7 @@ COPY categoria (cat, abrv, d) FROM stdin;
 --
 
 COPY comunidad_aprendizaje (cod_comu, prouea, asignacion_prouea, nombre_comu, cod_act) FROM stdin;
+01	t	prueba	prouea	1
 \.
 
 
@@ -704,7 +756,8 @@ COPY eje (ce, d) FROM stdin;
 -- Data for Name: estudio_superior; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY estudio_superior (cod_esup, tipo_esup, nombre_esup, cod_uni, cod_act, esup_realiza, esup_desea) FROM stdin;
+COPY estudio_superior (cod_esup, tipo_esup, nombre_esup, esup_realiza, esup_desea) FROM stdin;
+01	Pregrado	Ingeniero en Informatica	f	t
 \.
 
 
@@ -1514,7 +1567,8 @@ COPY historial (ci, d, f) FROM stdin;
 -- Data for Name: investigacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY investigacion (cod_inv, grupo_inv, nombre_inv, linea_inv, cod_act) FROM stdin;
+COPY investigacion (cod_inv, grupo_inv, nombre_inv, linea_inv, cod_act, linea_indagar) FROM stdin;
+01	f			1	
 \.
 
 
@@ -1587,6 +1641,7 @@ COPY observacion (p, ci, d) FROM stdin;
 --
 
 COPY peii (cod_peii, peii, "año_peii", cod_act) FROM stdin;
+01	t	2012-09-10	1
 \.
 
 
@@ -3328,24 +3383,11 @@ efsi	ELECTIVA FUNDAMENTOS DE SISTEMAS DE INFORMACIÓN	2	2	2	2	1	03	1	1
 
 
 --
--- Name: uc_cc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('uc_cc_seq', 1, false);
-
-
---
--- Name: uc_e_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('uc_e_seq', 1, false);
-
-
---
 -- Data for Name: universidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY universidad (cod_uni, nombre_uni) FROM stdin;
+01	Universidad Politécnica Territorial del Estado Mérida "Kleber Ramirez"
 \.
 
 
@@ -3372,6 +3414,7 @@ COPY usuario (ci, pw, r, n) FROM stdin;
 --
 
 COPY vivienda (cod_viv, tenencia_viv, cod_act) FROM stdin;
+01	t	1
 \.
 
 
@@ -3637,6 +3680,30 @@ ALTER TABLE ONLY usuario
 
 ALTER TABLE ONLY vivienda
     ADD CONSTRAINT vivienda_pkey PRIMARY KEY (cod_viv);
+
+
+--
+-- Name: actualizacion_estudio_cod_act_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actualizacion_estudio
+    ADD CONSTRAINT actualizacion_estudio_cod_act_fkey FOREIGN KEY (cod_act) REFERENCES actualizacion_prof(cod_act) ON UPDATE CASCADE;
+
+
+--
+-- Name: actualizacion_estudio_cod_esup_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actualizacion_estudio
+    ADD CONSTRAINT actualizacion_estudio_cod_esup_fkey FOREIGN KEY (cod_esup) REFERENCES estudio_superior(cod_esup) ON UPDATE CASCADE;
+
+
+--
+-- Name: actualizacion_estudio_cod_uni_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actualizacion_estudio
+    ADD CONSTRAINT actualizacion_estudio_cod_uni_fkey FOREIGN KEY (cod_uni) REFERENCES universidad(cod_uni) ON UPDATE CASCADE;
 
 
 --
