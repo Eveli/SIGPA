@@ -48,8 +48,20 @@
 
 <?php
 		break;
+
+			// Profesor
+		case '3':
+			$sql="select ci from profesor where ci='$_SESSION[ci]'";
+			$ejec=pg_query($sigpa, $sql);
+
+			$ci=pg_fetch_object($ejec);
+?>
+		<a href="<?="?r=data/Actualizacion/planilla_actualizacion.php&ci=$ci->ci" ?>"><li> Actualizacion </li></a>
+		<a href="?r=data/Ayuda/index.php"><li> Ayuda </li></a>
+
+<?php
+		break;
 	}
 ?>
-
 	</ul>
 </nav>

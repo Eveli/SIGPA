@@ -1,6 +1,6 @@
 <?php
 include "../../lib/conexion.php"; //Conexión
-include "../../lib/menu.php"; // Menú de navegación del sistema
+
 	
 	if (isset($_POST['cedula'])) $cedula= $_POST['cedula'];
     else $cedula = null;
