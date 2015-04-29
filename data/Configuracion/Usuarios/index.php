@@ -31,6 +31,10 @@
 			case 2:
 				echo "Coordinador";
 			break;
+
+			case 3:
+				echo "Profesor";
+			break;
 		}
 ?>
 
@@ -96,6 +100,8 @@
 			<select name="n" required="required">
 				<option value="">Nivel</option>
 				<option value="1">Vicerrectorado</option>
+				<option value="2">Coordinador</option>
+				<option value="3">Profesor</option>
 			</select><br/><br/>
 
 			<select name="ci" required="required">

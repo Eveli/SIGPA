@@ -4,10 +4,23 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = off;
+SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET escape_string_warning = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
 
 SET search_path = public, pg_catalog;
 
@@ -434,8 +447,8 @@ ALTER TABLE public.uc OWNER TO postgres;
 CREATE SEQUENCE uc_cc_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -449,21 +462,14 @@ ALTER SEQUENCE uc_cc_seq OWNED BY uc.cc;
 
 
 --
--- Name: uc_cc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('uc_cc_seq', 1, false);
-
-
---
 -- Name: uc_e_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE uc_e_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -474,13 +480,6 @@ ALTER TABLE public.uc_e_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE uc_e_seq OWNED BY uc.ce;
-
-
---
--- Name: uc_e_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('uc_e_seq', 1, false);
 
 
 --
@@ -1560,6 +1559,17 @@ COPY historial (ci, d, f) FROM stdin;
 1234	El usuario 1234 ha iniciado sesión	2015-04-15 21:56:25.783908
 4321	El usuario 4321 ha iniciado sesión	2015-04-22 16:48:30.879468
 1234	El usuario 1234 ha iniciado sesión	2015-04-22 17:00:28.604112
+4321	El usuario 4321 ha iniciado sesión	2015-04-23 10:19:01.853118
+4321	El usuario 4321 ha iniciado sesión	2015-04-29 15:23:40.250248
+1234	El usuario 1234 ha iniciado sesión	2015-04-29 15:23:52.968915
+1234	Se creó el usuario 09499979	2015-04-29 15:29:43.571532
+1234	El usuario 1234 ha iniciado sesión	2015-04-29 15:36:59.066701
+09499979	El usuario 09499979 ha iniciado sesión	2015-04-29 15:52:59.287975
+09499979	El usuario 09499979 ha iniciado sesión	2015-04-29 16:12:16.590948
+1234	El usuario 1234 ha iniciado sesión	2015-04-29 16:14:27.753015
+09499979	El usuario 09499979 ha iniciado sesión	2015-04-29 16:15:50.708999
+4321	El usuario 4321 ha iniciado sesión	2015-04-29 16:49:49.297933
+09499979	El usuario 09499979 ha iniciado sesión	2015-04-29 16:56:49.939555
 \.
 
 
@@ -3383,6 +3393,20 @@ efsi	ELECTIVA FUNDAMENTOS DE SISTEMAS DE INFORMACIÓN	2	2	2	2	1	03	1	1
 
 
 --
+-- Name: uc_cc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('uc_cc_seq', 1, false);
+
+
+--
+-- Name: uc_e_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('uc_e_seq', 1, false);
+
+
+--
 -- Data for Name: universidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3406,6 +3430,7 @@ COPY usuario (ci, pw, r, n) FROM stdin;
 12722185	1234	1234	2
 1234	4321	4321	1
 4321	1234	1234	2
+09499979	1234	prueba	3
 \.
 
 
