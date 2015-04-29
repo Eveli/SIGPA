@@ -37,37 +37,77 @@
     $tipo_esup = $_POST ['tipo_esup']
     $esup_desea = $_POST ['esup_desea'];
    
-  
+$sql =   "UPDATE carrera SET d = '$d' WHERE cc='$cc'"
+if(pg_query($sql))
+{	$sql = "UPDATE profesor SET ci = '$ci', n1 = '$n1', n2= '$n2', a1= '$a1', a2= '$a2', ce= '$ce', tf= '$tf', tm= '$tm', ded = $'ded', cat = $'cat'  WHERE ci = '$ci' cod";
+	
+	if(pg_query($sql))
+    {	$sql = "UPDATE actualizacion_prof SET sexo = $'sexo', direccion= $'direccion', fecha_ingreso = $'fecha_ingreso', año_ascenso = $'año_ascenso', otro_pnf = $'otro_pnf', conocimiento_pnf = $'conocimiento_pnf', tutor_pnf = $'tutor_pnf', observacion = $'observacion', fecha_act ='fecha_act'  WHERE cod_act = $'cod_act'"
 
-  //$sql =   "UPDATE carrera SET d = '$d' WHERE cc='$cc'
+		if(pg_query($sql))
+		{	$sql = "UPDATE comunidad_aprendizaje SET prouea = $'prouea', asignacion_prouea = $'asignacion_prouea', nombre_comu = $'nombre_comu', WHERE cod_act = $'cod_act'"
 
-    $sql = "UPDATE profesor SET ci = '$ci', n1 = '$n1', n2= '$n2', a1= '$a1', a2= '$a2', ce= '$ce', tf= '$tf', tm= '$tm', ded = $'ded', cat = $'cat'  WHERE ci = '$ci' cod";
+			if(pg_query($sql))
+			{	$sql = "UPDATE cubiculo SET tenencia_cub = $'tenencia_cub',  numero_cub = $'numero_cub', uso_cub = $'uso_cub', WHERE cod_act = $'cod_act'"
 
-  if(mysql_query($sql))
+				if(pg_query($sql))
+                {  $sql = "UPDATE peii SET peii = $'peii', año_peii = $'año_peii,' WHERE cod_act = $'cod_act'"
+
+ 				  	if(pg_query($sql))
+				  	{ $sql = "UPDATE investigacion SET grupo_inv = $'grupo_inv', nombre_inv = $'nombre_inv,' linea_indagar = $'linea_indagar' WHERE cod_act = $'cod_act'"
+
+				     	if(pg_query($sql))
+					  	{ $sql = "UPDATE estudio_superior SET esup_realiza = $'esup_realiza', tipo_esup = $'tipo_esup,' esup_desea = $'esup_desea' WHERE cod_esup = $'cod_esup'"
+
+							if(pg_query($sql))
+							{
+  								$sql = "UPDATE universidad SET nombre_uni = $'nombre_uni' WHERE cod_uni = $'cod_uni'"
+                         	
+	                         	if(pg_query($sql))
+					            {
+					                echo "<script type=\"text/javascript\"> alert('Exito al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+					            }
+					           else 
+					            {
+					                echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+					            }
+				        	}
+	                     	else
+				            {
+				                echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+				            }
+				        }
+                     	else
+			            {
+			                echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+			            }
+			        }
+                 	else
+		            {
+		                echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+		            }
+				}
+             	else
+	            {
+	                echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+	            }
+			}
+         	else
+            {
+                echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+            }
+		}
+     	else
         {
-
-    $sql = "UPDATE actualizacion_prof SET sexo = $'sexo', direccion= $'direccion', fecha_ingreso = $'fecha_ingreso', año_ascenso = $'año_ascenso', otro_pnf = $'otro_pnf', conocimiento_pnf = $'conocimiento_pnf', tutor_pnf = $'tutor_pnf', observacion = $'observacion', fecha_act ='fecha_act'  WHERE cod_act = $'cod_act'"
-
-if(mysql_query($sql))
-
-  $sql = "UPDATE comunidad_aprendizaje SET prouea = $'prouea', asignacion_prouea = $'asignacion_prouea', nombre_comu = $'nombre_comu', WHERE cod_act = $'cod_act'"
-
-if(mysql_query($sql))
-
-  $sql = "UPDATE cubiculo SET tenencia_cub = $'tenencia_cub',  numero_cub = $'numero_cub', uso_cub = $'uso_cub', WHERE cod_act = $'cod_act'"
-
-if(mysql_query($sql))
-
-  $sql = "UPDATE peii SET peii = $'peii', año_peii = $'año_peii,' WHERE cod_act = $'cod_act'"
-
-if(mysql_query($sql))
-
-  $sql = "UPDATE investigacion SET grupo_inv = $'grupo_inv', nombre_inv = $'nombre_inv,' linea_indagar = $'linea_indagar' WHERE cod_act = $'cod_act'"
-
-if(mysql_query($sql))
-
-  $sql = "UPDATE estudio_superior SET esup_realiza = $'esup_realiza', tipo_esup = $'tipo_esup,' esup_desea = $'esup_desea' WHERE cod_esup = $'cod_esup'"
-
-if(mysql_query($sql))
-
-  $sql = "UPDATE universidad SET nombre_uni = $'nombre_uni' WHERE cod_uni = $'cod_uni'"
+            echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+        }
+	}
+ 	else
+    {
+        echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+    }
+}
+else
+{
+echo "<script type=\"text/javascript\"> alert('Fallo al Actualizar'); window.location='?r=data/Actualizacion/planilla_actualizacion.php';</script>";
+}				            			            		            	                            
