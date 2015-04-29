@@ -146,11 +146,20 @@ h3
 input[type="text"],
 input[type="password"],
 input[type="number"],
+input[type="date"],
 select
 {
 	height: 30px;
 	width: 215px;
+	font-size: 16px;
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;
+}
 
+textarea
+{
+	
+	width: 465px;
 	font-size: 16px;
 	padding: 5px 10px 5px 10px;
 	border-radius: 5px;
@@ -394,6 +403,7 @@ legend
 	background: #0000cb;
 	border-radius: 10px;
 }
+/* ----- Fieldsets ----- */
 
 /* carga */
 .principal
@@ -403,3 +413,18 @@ legend
 	margin: 0 auto;
 	text-align: justify;
 }
+ /* ---- carga ---- */
+ /* Actualizacion */
+.fieldset1
+{
+	text-align: left;
+	padding:0px 100px 50px 210px;
+}
+.fieldset2
+{
+	text-align: left;
+	width:500px;
+}	
+ /* ---- Actualizacion ---- */
+
+
